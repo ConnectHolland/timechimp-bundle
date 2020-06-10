@@ -1,0 +1,2133 @@
+swagger: '2.0'
+info:
+  version: v1
+  title: TimeChimp Api
+  description: 'The TimeChimp API allows you to interact trough a RESTfull API with your TimeChimp account. Authorize each call with your API key in the Authorization header (as a Bearer token). To prevent fraud and abuse, requests to the API are throttled. You can request the API max 100 times each minute.'
+host: api.timechimp.com
+schemes:
+  - https
+paths:
+  /v1/customers:
+    get:
+      tags:
+        - Customers
+      summary: Get all customers
+      operationId: GetCustomers
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: List of customers
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Customer'
+    put:
+      tags:
+        - Customers
+      summary: Update customer
+      operationId: UpdateCustomer
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: customer
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Customer'
+      responses:
+        '200':
+          description: Customer
+          schema:
+            $ref: '#/definitions/Customer'
+    post:
+      tags:
+        - Customers
+      summary: Create new customer
+      operationId: CreateCustomer
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: customer
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Customer'
+      responses:
+        '200':
+          description: Customer
+          schema:
+            $ref: '#/definitions/Customer'
+  '/v1/customers/relationid/{relationId}':
+    get:
+      tags:
+        - Customers
+      summary: Get customers by relation id
+      operationId: GetCustomersByRelationId
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: relationId
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Customers
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Customer'
+  '/v1/customers/name/{name}':
+    get:
+      tags:
+        - Customers
+      summary: Get customer by name
+      operationId: GetCustomerByName
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: name
+          in: path
+          required: true
+          type: string
+      responses:
+        '200':
+          description: Customer
+          schema:
+            $ref: '#/definitions/Customer'
+  '/v1/customers/{id}':
+    get:
+      tags:
+        - Customers
+      summary: Get customer
+      operationId: GetCustomer
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Customer
+          schema:
+            $ref: '#/definitions/Customer'
+    delete:
+      tags:
+        - Customers
+      summary: Delete customer
+      operationId: DeleteCustomer
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+  '/v1/expenses/daterange/{startDate}/{endDate}':
+    get:
+      tags:
+        - Expenses
+      summary: Get expenses by date range
+      operationId: GetExpensesByDateRange
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: startDate
+          in: path
+          description: 'Start date as string in format: YYYY-MM-DD'
+          required: true
+          type: string
+          format: date-time
+        - name: endDate
+          in: path
+          description: 'End date as string in format: YYYY-MM-DD'
+          required: true
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: List of expenses
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Expense'
+  '/v1/expenses/project/{projectId}':
+    get:
+      tags:
+        - Expenses
+      summary: Get expenses by project
+      operationId: GetExpensesByProject
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: projectId
+          in: path
+          description: Id of the project
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: List of expenses
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Expense'
+  '/v1/expenses/{id}':
+    get:
+      tags:
+        - Expenses
+      summary: Get expense
+      operationId: GetExpense
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Expense
+          schema:
+            $ref: '#/definitions/Expense'
+  /v1/expenses:
+    get:
+      tags:
+        - Expenses
+      summary: Get expenses
+      operationId: GetExpenses
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: List of expenses
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Expense'
+    put:
+      tags:
+        - Expenses
+      summary: Update expense
+      operationId: UpdateExpense
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: expense
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Expense'
+      responses:
+        '200':
+          description: Expense
+          schema:
+            $ref: '#/definitions/Expense'
+    post:
+      tags:
+        - Expenses
+      summary: Create new expense
+      operationId: CreateExpense
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: expense
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Expense'
+      responses:
+        '200':
+          description: Expense
+          schema:
+            $ref: '#/definitions/Expense'
+    delete:
+      tags:
+        - Expenses
+      summary: Delete expense
+      operationId: DeleteExpense
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: id
+          in: query
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+  /v1/invoices:
+    get:
+      tags:
+        - Invoices
+      summary: Get all invoices
+      operationId: GetInvoices
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: List of invoices
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Invoice'
+  '/v1/mileage/daterange/{startDate}/{endDate}':
+    get:
+      tags:
+        - Mileage
+      summary: Get mileage by date range
+      operationId: GetMileageByDateRange
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: startDate
+          in: path
+          description: 'Start date as string in format: YYYY-MM-DD'
+          required: true
+          type: string
+          format: date-time
+        - name: endDate
+          in: path
+          description: 'End date as string in format: YYYY-MM-DD'
+          required: true
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: List of mileage
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Mileage'
+  '/v1/mileage/project/{projectId}':
+    get:
+      tags:
+        - Mileage
+      summary: Get mileage by project
+      operationId: GetMileageByProject
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: projectId
+          in: path
+          description: Id of the project
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: List of mileage
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Mileage'
+  '/v1/mileage/{id}':
+    get:
+      tags:
+        - Mileage
+      summary: Get mileage
+      operationId: GetMileage
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Mileage
+          schema:
+            $ref: '#/definitions/Mileage'
+  /v1/mileage:
+    get:
+      tags:
+        - Mileage
+      summary: Get mileages
+      operationId: GetMileages
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: List of mileage
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Mileage'
+    put:
+      tags:
+        - Mileage
+      summary: Update mileage
+      operationId: UpdateMileage
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: mileage
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Mileage'
+      responses:
+        '200':
+          description: Mileage
+          schema:
+            $ref: '#/definitions/Mileage'
+    post:
+      tags:
+        - Mileage
+      summary: Create new mileage
+      operationId: CreateMileage
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: mileage
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Mileage'
+      responses:
+        '200':
+          description: Mileage
+          schema:
+            $ref: '#/definitions/Mileage'
+    delete:
+      tags:
+        - Mileage
+      summary: Delete mileage
+      operationId: DeleteMileage
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: id
+          in: query
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+  /v1/projectnotes:
+    get:
+      tags:
+        - ProjectNotes
+      summary: Get all project notes
+      operationId: GetProjectNotes
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: List of project notes
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ProjectNote'
+    put:
+      tags:
+        - ProjectNotes
+      summary: Update project note
+      operationId: UpdateProjectNote
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: projectNote
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ProjectNote'
+      responses:
+        '200':
+          description: ProjectNote
+          schema:
+            $ref: '#/definitions/ProjectNote'
+    post:
+      tags:
+        - ProjectNotes
+      summary: Create new project note
+      operationId: CreateProjectNote
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: projectNote
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/ProjectNote'
+      responses:
+        '200':
+          description: ProjectNote
+          schema:
+            $ref: '#/definitions/ProjectNote'
+    delete:
+      tags:
+        - ProjectNotes
+      summary: Delete project note
+      operationId: DeleteProjectNote
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: id
+          in: query
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+  '/v1/projectnotes/{id}':
+    get:
+      tags:
+        - ProjectNotes
+      summary: Get projectnsote
+      operationId: GetProjectNote
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: ProjectNote
+          schema:
+            $ref: '#/definitions/ProjectNote'
+  '/v1/projectnotes/project/{projectId}':
+    get:
+      tags:
+        - ProjectNotes
+      summary: Get project notes by project
+      operationId: GetProjectNotesByProject
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: projectId
+          in: path
+          description: Id of the project
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: List of project notes
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/ProjectNote'
+  /v1/projects:
+    get:
+      tags:
+        - Projects
+      summary: Get all projects
+      operationId: GetProjects
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: List of projects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Project'
+    put:
+      tags:
+        - Projects
+      summary: Update project
+      operationId: UpdateProject
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: project
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Project'
+      responses:
+        '200':
+          description: Project
+          schema:
+            $ref: '#/definitions/Project'
+    post:
+      tags:
+        - Projects
+      summary: Create new project
+      operationId: CreateProject
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: project
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Project'
+      responses:
+        '200':
+          description: Project
+          schema:
+            $ref: '#/definitions/Project'
+    delete:
+      tags:
+        - Projects
+      summary: Delete project
+      operationId: DeleteProject
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: id
+          in: query
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+  '/v1/projects/{id}':
+    get:
+      tags:
+        - Projects
+      summary: Get project
+      operationId: GetProject
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Project
+          schema:
+            $ref: '#/definitions/Project'
+  '/v1/projects/customer/{customerId}':
+    get:
+      tags:
+        - Projects
+      summary: Get projects by customer
+      operationId: GetProjectsByCustomer
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: customerId
+          in: path
+          description: Id of the customer
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: List of projects
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Project'
+  '/v1/projects/insights/{id}':
+    get:
+      tags:
+        - Projects
+      summary: Get project insights
+      operationId: GetProjectInsights
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: ProjectInsights
+          schema:
+            $ref: '#/definitions/ProjectInsights'
+  /v1/tags:
+    get:
+      tags:
+        - Tags
+      summary: Get all tags
+      operationId: GetTags
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: List of tags
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Tag'
+    put:
+      tags:
+        - Tags
+      summary: Update tag
+      operationId: UpdateTag
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: tag
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Tag'
+      responses:
+        '200':
+          description: Tag
+          schema:
+            $ref: '#/definitions/Tag'
+    post:
+      tags:
+        - Tags
+      summary: Create new tag
+      operationId: CreateTag
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: tag
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Tag'
+      responses:
+        '200':
+          description: Tag
+          schema:
+            $ref: '#/definitions/Tag'
+    delete:
+      tags:
+        - Tags
+      summary: Delete tag
+      operationId: DeleteTag
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: id
+          in: query
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+  '/v1/tags/{id}':
+    get:
+      tags:
+        - Tags
+      summary: Get tag by id
+      operationId: GetTag
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Tag
+          schema:
+            $ref: '#/definitions/Tag'
+  /v1/tasks:
+    get:
+      tags:
+        - Tasks
+      summary: Get all tasks
+      operationId: GetTasks
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: List of tasks
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Task'
+    put:
+      tags:
+        - Tasks
+      summary: Update task
+      operationId: UpdateTask
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: task
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Task'
+      responses:
+        '200':
+          description: Task
+          schema:
+            $ref: '#/definitions/Task'
+    post:
+      tags:
+        - Tasks
+      summary: Create new task
+      operationId: CreateTask
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: task
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Task'
+      responses:
+        '200':
+          description: Task
+          schema:
+            $ref: '#/definitions/Task'
+    delete:
+      tags:
+        - Tasks
+      summary: Delete task
+      operationId: DeleteTask
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: id
+          in: query
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+  '/v1/tasks/{id}':
+    get:
+      tags:
+        - Tasks
+      summary: Get task entry
+      operationId: GetTask
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Task
+          schema:
+            $ref: '#/definitions/Task'
+  '/v1/time/daterange/{startDate}/{endDate}':
+    get:
+      tags:
+        - Time
+      summary: Get time entries by date range
+      operationId: GetTimeByDateRange
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: startDate
+          in: path
+          description: 'Start date as string in format: YYYY-MM-DD'
+          required: true
+          type: string
+          format: date-time
+        - name: endDate
+          in: path
+          description: 'End date as string in format: YYYY-MM-DD'
+          required: true
+          type: string
+          format: date-time
+      responses:
+        '200':
+          description: List of time entries
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Time'
+  '/v1/time/project/{projectId}':
+    get:
+      tags:
+        - Time
+      summary: Get time entries by project
+      operationId: GetTimeByProject
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: projectId
+          in: path
+          description: Id of the project
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: List of time entries
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Time'
+  '/v1/time/{id}':
+    get:
+      tags:
+        - Time
+      summary: Get time entry
+      operationId: GetTime
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Time
+          schema:
+            $ref: '#/definitions/Time'
+  /v1/time:
+    get:
+      tags:
+        - Time
+      summary: Get time entries
+      operationId: GetTimes
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: List of time entries
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/Time'
+    put:
+      tags:
+        - Time
+      summary: Update time entry
+      operationId: UpdateTime
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: time
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Time'
+      responses:
+        '200':
+          description: Time
+          schema:
+            $ref: '#/definitions/Time'
+    post:
+      tags:
+        - Time
+      summary: Create new time entry
+      operationId: CreateTime
+      consumes:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+        - application/x-www-form-urlencoded
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: time
+          in: body
+          required: true
+          schema:
+            $ref: '#/definitions/Time'
+      responses:
+        '200':
+          description: Time
+          schema:
+            $ref: '#/definitions/Time'
+    delete:
+      tags:
+        - Time
+      summary: Delete time entry
+      operationId: DeleteTime
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: id
+          in: query
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: OK
+  '/v1/time/starttimer/{id}':
+    post:
+      tags:
+        - Time
+      operationId: StartTimer
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: DateTime of timer started
+          schema:
+            format: date-time
+            type: string
+  '/v1/time/stoptimer/{id}':
+    post:
+      tags:
+        - Time
+      operationId: StopTimer
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      parameters:
+        - name: id
+          in: path
+          required: true
+          type: integer
+          format: int32
+      responses:
+        '200':
+          description: Total hours of stopped timer
+          schema:
+            format: float
+            type: number
+  /v1/users:
+    get:
+      tags:
+        - Users
+      summary: Get all users
+      operationId: GetUsers
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: List of users
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+    put:
+      tags:
+        - Users
+      summary: update user 
+      operationId: PutUsers
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: update users employee number and display name
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/User'
+  /v1/users/me:
+    get:
+      tags:
+        - Users
+      summary: Get current user
+      operationId: Me
+      consumes: []
+      produces:
+        - application/json
+        - text/json
+        - application/xml
+        - text/xml
+      responses:
+        '200':
+          description: Get current user
+          schema:
+            $ref: '#/definitions/User'
+definitions:
+  Customer:
+    required:
+      - name
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      active:
+        type: boolean
+      relationId:
+        type: string
+      name:
+        description: Customer name is required
+        type: string
+      address:
+        type: string
+      postalCode:
+        type: string
+      city:
+        type: string
+      country:
+        type: string
+      phone:
+        type: string
+      email:
+        type: string
+      website:
+        type: string
+      paymentPeriod:
+        format: int32
+        type: integer
+      tax:
+        format: double
+        type: number
+      hourlyRate:
+        format: double
+        type: number
+      mileageRate:
+        format: double
+        type: number
+      iban:
+        type: string
+      bic:
+        type: string
+      vatNumber:
+        type: string
+      kvkNumber:
+        type: string
+      invoiceAddress:
+        type: string
+      invoicePostalCode:
+        type: string
+      invoiceCity:
+        type: string
+      invoiceCountry:
+        type: string
+      notes:
+        type: string
+      clientId:
+        format: uuid
+        type: string
+        example: 00000000-0000-0000-0000-000000000000
+      tagIds:
+        type: array
+        items:
+          format: int32
+          type: integer
+      tagNames:
+        type: array
+        items:
+          type: string
+      vatRateId:
+        format: int32
+        type: integer
+      vatRatePercentage:
+        format: double
+        type: number
+  Expense:
+    required:
+      - date
+      - rate
+      - tax
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      customerId:
+        format: int32
+        description: CustomerId or ProjectId is required
+        type: integer
+      customerName:
+        type: string
+      projectId:
+        format: int32
+        description: 'CustomerId or ProjectId is required. When ProjectId is filled, CustomerId can be empty.'
+        type: integer
+      projectName:
+        type: string
+      categoryName:
+        type: string
+      categoryId:
+        format: int32
+        type: integer
+      userId:
+        format: int32
+        description: 'If UserId is empty, current user will be linked'
+        type: integer
+      userDisplayName:
+        type: string
+      date:
+        format: date-time
+        description: Date is required
+        type: string
+      notes:
+        type: string
+      attachment:
+        type: string
+      quantity:
+        format: double
+        description: Default is 1
+        type: number
+      rate:
+        format: double
+        description: Rate is required
+        type: number
+      tax:
+        format: double
+        description: 'Tax is required. 21% = 21.00, 6% = 6.00, 0% = 0.0.'
+        type: number
+      billable:
+        type: boolean
+      status:
+        format: int32
+        description: '0 = Open, 1 = PendingApproval, 2 = Approved, 3 = Invoiced, 4 = WrittenOff, -1 = Rejected'
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - -1
+        type: integer
+  Invoice:
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      clientId:
+        format: uuid
+        type: string
+        example: 00000000-0000-0000-0000-000000000000
+      companyInvoicePrefix:
+        type: string
+      companyInvoiceId:
+        format: int32
+        type: integer
+      customerId:
+        format: int32
+        type: integer
+      status:
+        format: int32
+        description: '1 = Concept, 2 = Open, 3 = Paid'
+        enum:
+          - 1
+          - 2
+          - 3
+        type: integer
+      customerRelationId:
+        type: string
+      customerName:
+        type: string
+      customerContactPerson:
+        type: string
+      customerEmail:
+        type: string
+      customerAddress:
+        type: string
+      customerVatNumber:
+        type: string
+      date:
+        format: date-time
+        type: string
+      dueDate:
+        format: date-time
+        type: string
+      reference:
+        type: string
+      notes:
+        type: string
+      total:
+        format: double
+        type: number
+      totalWithoutExchangeRate:
+        format: double
+        type: number
+      totalExTax:
+        format: double
+        type: number
+      totalExTaxWithoutExchangeRate:
+        format: double
+        type: number
+      additionalNotes:
+        type: string
+      internNotes:
+        type: string
+      currency:
+        type: string
+      language:
+        type: string
+      exchangeRate:
+        format: double
+        type: number
+      credit:
+        type: boolean
+      invoiceRows:
+        type: array
+        items:
+          $ref: '#/definitions/InvoiceRow'
+  InvoiceRow:
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      invoiceId:
+        format: int32
+        type: integer
+      description:
+        type: string
+      quantity:
+        format: double
+        type: number
+      price:
+        format: double
+        type: number
+      tax:
+        format: double
+        type: number
+      total:
+        format: double
+        type: number
+      index:
+        format: int32
+        type: integer
+      code:
+        type: string
+  Mileage:
+    required:
+      - date
+      - distance
+      - type
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      customerId:
+        format: int32
+        type: integer
+      customerName:
+        type: string
+      projectId:
+        format: int32
+        description: 'When ProjectId is filled, CustomerId can be empty.'
+        type: integer
+      projectName:
+        type: string
+      vehicleId:
+        format: int32
+        type: integer
+      vehicleName:
+        type: string
+      userId:
+        format: int32
+        description: 'If UserId is empty, current user will be linked'
+        type: integer
+      userDisplayName:
+        type: string
+      date:
+        format: date-time
+        description: Date is required
+        type: string
+      fromAddress:
+        type: string
+      toAddress:
+        type: string
+      notes:
+        type: string
+      distance:
+        format: double
+        description: Distance is required
+        type: number
+      billable:
+        type: boolean
+      type:
+        format: int32
+        description: 'Type is required1 = Private, 2 = Business, 3 = HomeWork'
+        enum:
+          - 1
+          - 2
+          - 3
+        type: integer
+      status:
+        format: int32
+        description: '0 = Open, 1 = PendingApproval, 2 = Approved, 3 = Invoiced, 4 = WrittenOff, -1 = Rejected'
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - -1
+        type: integer
+  ProjectNote:
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      description:
+        type: string
+      date:
+        format: date-time
+        type: string
+      projectId:
+        format: int32
+        type: integer
+  Project:
+    required:
+      - customerId
+      - name
+    type: object
+    properties:
+      remainingBudgetHours:
+        format: double
+        type: number
+      tagIds:
+        type: array
+        items:
+          format: int32
+          type: integer
+      tagNames:
+        type: array
+        items:
+          type: string
+      unspecified:
+        type: boolean
+      invoiceDate:
+        format: date-time
+        type: string
+      invoiceInInstallments:
+        type: boolean
+      budgetNotificationPercentage:
+        format: double
+        type: number
+      budgetNotificationHasBeenSent:
+        type: boolean
+      clientId:
+        format: uuid
+        type: string
+        example: 00000000-0000-0000-0000-000000000000
+      invoiceStatus:
+        format: int32
+        description: '0 = Open, 1 = PendingApproval, 2 = Approved, 3 = Invoiced, 4 = WrittenOff, -1 = Rejected'
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - -1
+        type: integer
+      invoiceId:
+        format: int32
+        type: integer
+      color:
+        type: string
+      visibleOnSchedule:
+        type: boolean
+      externalUrl:
+        type: string
+      externalName:
+        type: string
+      invoiceReference:
+        type: string
+      projectTasks:
+        type: array
+        items:
+          $ref: '#/definitions/ProjectTask'
+      projectUsers:
+        type: array
+        items:
+          $ref: '#/definitions/ProjectUser'
+      id:
+        format: int32
+        type: integer
+      active:
+        type: boolean
+      customerId:
+        format: int32
+        description: Customer id is required
+        type: integer
+      customerName:
+        type: string
+      name:
+        description: Customer name is required
+        type: string
+      code:
+        type: string
+      notes:
+        type: string
+      invoiceMethod:
+        format: int32
+        description: '1 = NoInvoicing, 2 = TaskHourlyRate, 3 = UserHourlyRate, 4 = ProjectHourlyRate, 5 = CustomerHourlyRate, 6 = ProjectRate, 7 = TaskRate, 8 = MilestoneRate, 9 = Subscription'
+        enum:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+          - 8
+          - 9
+        type: integer
+      hourlyRate:
+        format: double
+        type: number
+      rate:
+        format: double
+        type: number
+      budgetMethod:
+        format: int32
+        description: '1 = NoBudget, 2 = TotalHours, 3 = TaskHours, 4 = UserHours, 5 = TotalRate, 6 = TaskRate, 7 = Invoiced'
+        enum:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+          - 7
+        type: integer
+      budgetRate:
+        format: double
+        type: number
+      budgetHours:
+        format: double
+        type: number
+      startDate:
+        format: date-time
+        type: string
+      endDate:
+        format: date-time
+        type: string
+      projectSubscription:
+        $ref: '#/definitions/ProjectSubscription'
+  ProjectTask:
+    required:
+      - taskId
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      taskId:
+        format: int32
+        description: Task id is required
+        type: integer
+      taskName:
+        description: 'Name of task. Only get, no set.'
+        type: string
+      hourlyRate:
+        format: double
+        type: number
+      billable:
+        type: boolean
+      unspecified:
+        type: boolean
+      budgetHours:
+        format: double
+        type: number
+  ProjectUser:
+    required:
+      - userId
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      userId:
+        format: int32
+        description: User id is required
+        type: integer
+      userDisplayName:
+        description: 'Name of user. Only get, no set.'
+        type: string
+      hourlyRate:
+        format: double
+        type: number
+      budgetHours:
+        format: double
+        type: number
+      projectManager:
+        type: boolean
+  ProjectSubscription:
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      frequency:
+        format: int32
+        description: '1 = Week, 2 = Month, 3 = Quarter, 4 = Year'
+        enum:
+          - 1
+          - 2
+          - 3
+          - 4
+        type: integer
+      startDate:
+        format: date-time
+        type: string
+      endDate:
+        format: date-time
+        type: string
+      description:
+        type: string
+      code:
+        type: string
+      amount:
+        format: double
+        type: number
+      rate:
+        format: double
+        type: number
+  ProjectInsights:
+    type: object
+    properties:
+      totalHours:
+        format: double
+        type: number
+      totalHoursBillable:
+        format: double
+        type: number
+      totalHoursNonBillable:
+        format: double
+        type: number
+      totalUninvoiced:
+        format: double
+        type: number
+      totalInvoiced:
+        format: double
+        type: number
+      totalWrittenOff:
+        format: double
+        type: number
+      totalScheduled:
+        format: double
+        type: number
+      budgetPercentage:
+        format: int32
+        type: integer
+      budget:
+        format: double
+        type: number
+      spend:
+        format: double
+        type: number
+      remainingBudget:
+        format: double
+        type: number
+      costs:
+        format: double
+        type: number
+  Tag:
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      name:
+        type: string
+      active:
+        type: boolean
+      type:
+        format: int32
+        description: 'Time = 1, Expense = 2, Mileage = 3, Project = 4, Customer = 5, User = 6'
+        enum:
+          - 1
+          - 2
+          - 3
+          - 4
+          - 5
+          - 6
+        type: integer
+  Task:
+    required:
+      - name
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      active:
+        type: boolean
+      name:
+        description: Task name is required
+        type: string
+      code:
+        type: string
+      hourlyRate:
+        format: double
+        type: number
+      billable:
+        type: boolean
+      common:
+        type: boolean
+      unspecified:
+        type: boolean
+  Time:
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      customerId:
+        format: int32
+        description: CustomerId or ProjectId is required
+        type: integer
+      customerName:
+        type: string
+      projectId:
+        format: int32
+        description: 'CustomerId or ProjectId is required. When ProjectId is filled, CustomerId can be empty.'
+        type: integer
+      projectName:
+        type: string
+      projectTaskId:
+        format: int32
+        description: Use projectTaskId if working with projects
+        type: integer
+      taskId:
+        format: int32
+        description: Use task if working not working with projects (only customers)
+        type: integer
+      taskName:
+        type: string
+      userId:
+        format: int32
+        description: 'If UserId is empty, current user will be linked'
+        type: integer
+      userDisplayName:
+        type: string
+      userTags:
+        type: array
+        items:
+          type: string
+      date:
+        format: date-time
+        type: string
+      hours:
+        format: double
+        type: number
+      notes:
+        type: string
+      status:
+        format: int32
+        description: '0 = Open, 1 = PendingApproval, 2 = Approved, 3 = Invoiced, 4 = WrittenOff, -1 = Rejected'
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - -1
+        type: integer
+      startEnd:
+        type: string
+        description: 'DEPRECATED property for the start+end time of a time. Use {start} and {end} properties from now on.'
+      start:
+        type: string
+        format: '2020-01-30T00:00:00'
+        description: 'The start date + time (UTC) on which the time starts.'
+      end:
+        type: string
+        format: '2020-01-31T23:59:59'
+        description: 'The end date + time (UTC) on which the time ends. Condition: {end} >= {start}.'
+      pause:
+        format: double
+        type: number
+      externalName:
+        type: string
+      externalUrl:
+        type: string
+      statusIntern:
+        format: int32
+        description: '0 = Open, 1 = PendingApproval, 2 = Approved, 3 = Invoiced, 4 = WrittenOff, -1 = Rejected'
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - -1
+        type: integer
+      statusExtern:
+        format: int32
+        description: '0 = Open, 1 = PendingApproval, 2 = Approved, 3 = Invoiced, 4 = WrittenOff, -1 = Rejected'
+        enum:
+          - 0
+          - 1
+          - 2
+          - 3
+          - 4
+          - -1
+        type: integer
+      tags:
+        type: array
+        items:
+          $ref: '#/definitions/Tag'
+  User:
+    type: object
+    properties:
+      id:
+        format: int32
+        type: integer
+      userName:
+        type: string
+      displayName:
+        type: string
+      accountType:
+        format: int32
+        description: '0 = Onbekend, 1 = Gebruiker, 2 = Beheerder, 4 = Projectmanager'
+        enum:
+          - 0
+          - 1
+          - 2
+          - 4
+        type: integer
+      isLocked:
+        type: boolean
+      picture:
+        type: string
+      tagNames:
+        type: array
+        items:
+          type: string
+      language:
+        type: string
+      contractHours:
+        format: double
+        type: number
+      contractHourlyRate:
+        format: double
+        type: number
+      contractCostHourlyRate:
+        format: double
+        type: number
+      contractStartDate:
+        format: date-time
+        type: string
+      contractEndDate:
+        format: date-time
+        type: string
+      created:
+        format: date-time
+        type: string
+      teamName:
+        type: string
+      employeeNumber:
+        type: string
+securityDefinitions:
+  Access token:
+    type: apiKey
+    description: "\r\n                                Authenticate your Web API requests by providing a bearer token.\r\n                               \r\n                                Login at TimeChimp and go to Manage -> Settings -> API to obtain your api key. The token should be passed in the Authorization header of each API call.\r\n                              \r\n                                Example: 'Authorization: Bearer {your_access_token}'\r\n                            "
+    name: Authorization
+    in: header

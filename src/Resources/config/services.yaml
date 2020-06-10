@@ -1,0 +1,19 @@
+parameters:
+
+services:
+    _defaults:
+        autowire: false
+        autoconfigure: false
+        public: false
+
+    ConnectHolland\TimechimpBundle\Api\Authentication\AccessTokenAuthentication:
+        arguments:
+            $apiKey: 'Bearer %env(TIMECHIMP_ACCESS_TOKEN)%'
+
+    ConnectHolland\TimechimpBundle\Api\Client:
+        public: true
+        lazy: true
+        factory: [ConnectHolland\TimechimpBundle\Api\Client, create]
+        arguments:
+            $httpClient: ~
+            $authentication: '@ConnectHolland\TimechimpBundle\Api\Authentication\AccessTokenAuthentication'
