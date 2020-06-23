@@ -57,4 +57,9 @@ class GetMileageByDateRange extends \Jane\OpenApiRuntime\Client\BaseEndpoint imp
             return $serializer->deserialize($body, 'ConnectHolland\\TimechimpBundle\\Api\\Model\\Mileage[]', 'json');
         }
     }
+
+    public function getAuthenticationScopes(): array
+    {
+        return [];
+    }
 }

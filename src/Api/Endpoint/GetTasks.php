@@ -44,4 +44,9 @@ class GetTasks extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane
             return $serializer->deserialize($body, 'ConnectHolland\\TimechimpBundle\\Api\\Model\\Task[]', 'json');
         }
     }
+
+    public function getAuthenticationScopes(): array
+    {
+        return [];
+    }
 }

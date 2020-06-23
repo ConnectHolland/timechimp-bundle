@@ -44,4 +44,9 @@ class GetProjectNotes extends \Jane\OpenApiRuntime\Client\BaseEndpoint implement
             return $serializer->deserialize($body, 'ConnectHolland\\TimechimpBundle\\Api\\Model\\ProjectNote[]', 'json');
         }
     }
+
+    public function getAuthenticationScopes(): array
+    {
+        return [];
+    }
 }

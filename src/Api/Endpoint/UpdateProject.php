@@ -49,4 +49,9 @@ class UpdateProject extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements 
             return $serializer->deserialize($body, 'ConnectHolland\\TimechimpBundle\\Api\\Model\\Project', 'json');
         }
     }
+
+    public function getAuthenticationScopes(): array
+    {
+        return [];
+    }
 }

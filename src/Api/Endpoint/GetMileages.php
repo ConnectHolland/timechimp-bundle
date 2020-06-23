@@ -44,4 +44,9 @@ class GetMileages extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \J
             return $serializer->deserialize($body, 'ConnectHolland\\TimechimpBundle\\Api\\Model\\Mileage[]', 'json');
         }
     }
+
+    public function getAuthenticationScopes(): array
+    {
+        return [];
+    }
 }

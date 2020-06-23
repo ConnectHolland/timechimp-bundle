@@ -66,4 +66,9 @@ class DeleteExpense extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements 
             return null;
         }
     }
+
+    public function getAuthenticationScopes(): array
+    {
+        return [];
+    }
 }

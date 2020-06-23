@@ -54,4 +54,9 @@ class GetExpensesByProject extends \Jane\OpenApiRuntime\Client\BaseEndpoint impl
             return $serializer->deserialize($body, 'ConnectHolland\\TimechimpBundle\\Api\\Model\\Expense[]', 'json');
         }
     }
+
+    public function getAuthenticationScopes(): array
+    {
+        return [];
+    }
 }

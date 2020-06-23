@@ -44,4 +44,9 @@ class GetInvoices extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \J
             return $serializer->deserialize($body, 'ConnectHolland\\TimechimpBundle\\Api\\Model\\Invoice[]', 'json');
         }
     }
+
+    public function getAuthenticationScopes(): array
+    {
+        return [];
+    }
 }

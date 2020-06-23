@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace ConnectHolland\TimechimpBundle\Api\Normalizer;
 
+use Jane\JsonSchemaRuntime\Normalizer\CheckArray;
+use Jane\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -20,6 +22,7 @@ class ProjectSubscriptionNormalizer implements DenormalizerInterface, Normalizer
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
+    use CheckArray;
 
     public function supportsDenormalization($data, $type, $format = null)
     {
@@ -33,48 +36,51 @@ class ProjectSubscriptionNormalizer implements DenormalizerInterface, Normalizer
 
     public function denormalize($data, $class, $format = null, array $context = [])
     {
-        if (!is_object($data)) {
-            return null;
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
+        }
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \ConnectHolland\TimechimpBundle\Api\Model\ProjectSubscription();
-        if (property_exists($data, 'id') && $data->{'id'} !== null) {
-            $object->setId($data->{'id'});
-        } elseif (property_exists($data, 'id') && $data->{'id'} === null) {
+        if (\array_key_exists('id', $data) && $data['id'] !== null) {
+            $object->setId($data['id']);
+        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
             $object->setId(null);
         }
-        if (property_exists($data, 'frequency') && $data->{'frequency'} !== null) {
-            $object->setFrequency($data->{'frequency'});
-        } elseif (property_exists($data, 'frequency') && $data->{'frequency'} === null) {
+        if (\array_key_exists('frequency', $data) && $data['frequency'] !== null) {
+            $object->setFrequency($data['frequency']);
+        } elseif (\array_key_exists('frequency', $data) && $data['frequency'] === null) {
             $object->setFrequency(null);
         }
-        if (property_exists($data, 'startDate') && $data->{'startDate'} !== null) {
-            $object->setStartDate(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data->{'startDate'}));
-        } elseif (property_exists($data, 'startDate') && $data->{'startDate'} === null) {
+        if (\array_key_exists('startDate', $data) && $data['startDate'] !== null) {
+            $object->setStartDate(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data['startDate']));
+        } elseif (\array_key_exists('startDate', $data) && $data['startDate'] === null) {
             $object->setStartDate(null);
         }
-        if (property_exists($data, 'endDate') && $data->{'endDate'} !== null) {
-            $object->setEndDate(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data->{'endDate'}));
-        } elseif (property_exists($data, 'endDate') && $data->{'endDate'} === null) {
+        if (\array_key_exists('endDate', $data) && $data['endDate'] !== null) {
+            $object->setEndDate(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data['endDate']));
+        } elseif (\array_key_exists('endDate', $data) && $data['endDate'] === null) {
             $object->setEndDate(null);
         }
-        if (property_exists($data, 'description') && $data->{'description'} !== null) {
-            $object->setDescription($data->{'description'});
-        } elseif (property_exists($data, 'description') && $data->{'description'} === null) {
+        if (\array_key_exists('description', $data) && $data['description'] !== null) {
+            $object->setDescription($data['description']);
+        } elseif (\array_key_exists('description', $data) && $data['description'] === null) {
             $object->setDescription(null);
         }
-        if (property_exists($data, 'code') && $data->{'code'} !== null) {
-            $object->setCode($data->{'code'});
-        } elseif (property_exists($data, 'code') && $data->{'code'} === null) {
+        if (\array_key_exists('code', $data) && $data['code'] !== null) {
+            $object->setCode($data['code']);
+        } elseif (\array_key_exists('code', $data) && $data['code'] === null) {
             $object->setCode(null);
         }
-        if (property_exists($data, 'amount') && $data->{'amount'} !== null) {
-            $object->setAmount($data->{'amount'});
-        } elseif (property_exists($data, 'amount') && $data->{'amount'} === null) {
+        if (\array_key_exists('amount', $data) && $data['amount'] !== null) {
+            $object->setAmount($data['amount']);
+        } elseif (\array_key_exists('amount', $data) && $data['amount'] === null) {
             $object->setAmount(null);
         }
-        if (property_exists($data, 'rate') && $data->{'rate'} !== null) {
-            $object->setRate($data->{'rate'});
-        } elseif (property_exists($data, 'rate') && $data->{'rate'} === null) {
+        if (\array_key_exists('rate', $data) && $data['rate'] !== null) {
+            $object->setRate($data['rate']);
+        } elseif (\array_key_exists('rate', $data) && $data['rate'] === null) {
             $object->setRate(null);
         }
 
@@ -83,46 +89,30 @@ class ProjectSubscriptionNormalizer implements DenormalizerInterface, Normalizer
 
     public function normalize($object, $format = null, array $context = [])
     {
-        $data = new \stdClass();
+        $data = [];
         if (null !== $object->getId()) {
-            $data->{'id'} = $object->getId();
-        } else {
-            $data->{'id'} = null;
+            $data['id'] = $object->getId();
         }
         if (null !== $object->getFrequency()) {
-            $data->{'frequency'} = $object->getFrequency();
-        } else {
-            $data->{'frequency'} = null;
+            $data['frequency'] = $object->getFrequency();
         }
         if (null !== $object->getStartDate()) {
-            $data->{'startDate'} = $object->getStartDate()->format('Y-m-d\\TH:i:s');
-        } else {
-            $data->{'startDate'} = null;
+            $data['startDate'] = $object->getStartDate()->format('Y-m-d\\TH:i:s');
         }
         if (null !== $object->getEndDate()) {
-            $data->{'endDate'} = $object->getEndDate()->format('Y-m-d\\TH:i:s');
-        } else {
-            $data->{'endDate'} = null;
+            $data['endDate'] = $object->getEndDate()->format('Y-m-d\\TH:i:s');
         }
         if (null !== $object->getDescription()) {
-            $data->{'description'} = $object->getDescription();
-        } else {
-            $data->{'description'} = null;
+            $data['description'] = $object->getDescription();
         }
         if (null !== $object->getCode()) {
-            $data->{'code'} = $object->getCode();
-        } else {
-            $data->{'code'} = null;
+            $data['code'] = $object->getCode();
         }
         if (null !== $object->getAmount()) {
-            $data->{'amount'} = $object->getAmount();
-        } else {
-            $data->{'amount'} = null;
+            $data['amount'] = $object->getAmount();
         }
         if (null !== $object->getRate()) {
-            $data->{'rate'} = $object->getRate();
-        } else {
-            $data->{'rate'} = null;
+            $data['rate'] = $object->getRate();
         }
 
         return $data;

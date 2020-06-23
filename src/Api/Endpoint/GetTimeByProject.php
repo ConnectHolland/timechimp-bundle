@@ -54,4 +54,9 @@ class GetTimeByProject extends \Jane\OpenApiRuntime\Client\BaseEndpoint implemen
             return $serializer->deserialize($body, 'ConnectHolland\\TimechimpBundle\\Api\\Model\\Time[]', 'json');
         }
     }
+
+    public function getAuthenticationScopes(): array
+    {
+        return [];
+    }
 }

@@ -51,4 +51,9 @@ class StartTimer extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Ja
             return json_decode($body);
         }
     }
+
+    public function getAuthenticationScopes(): array
+    {
+        return [];
+    }
 }

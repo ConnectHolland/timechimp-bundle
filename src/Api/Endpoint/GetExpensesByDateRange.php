@@ -57,4 +57,9 @@ class GetExpensesByDateRange extends \Jane\OpenApiRuntime\Client\BaseEndpoint im
             return $serializer->deserialize($body, 'ConnectHolland\\TimechimpBundle\\Api\\Model\\Expense[]', 'json');
         }
     }
+
+    public function getAuthenticationScopes(): array
+    {
+        return [];
+    }
 }

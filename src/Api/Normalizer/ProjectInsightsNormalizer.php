@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace ConnectHolland\TimechimpBundle\Api\Normalizer;
 
+use Jane\JsonSchemaRuntime\Normalizer\CheckArray;
+use Jane\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -20,6 +22,7 @@ class ProjectInsightsNormalizer implements DenormalizerInterface, NormalizerInte
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
+    use CheckArray;
 
     public function supportsDenormalization($data, $type, $format = null)
     {
@@ -33,68 +36,71 @@ class ProjectInsightsNormalizer implements DenormalizerInterface, NormalizerInte
 
     public function denormalize($data, $class, $format = null, array $context = [])
     {
-        if (!is_object($data)) {
-            return null;
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
+        }
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \ConnectHolland\TimechimpBundle\Api\Model\ProjectInsights();
-        if (property_exists($data, 'totalHours') && $data->{'totalHours'} !== null) {
-            $object->setTotalHours($data->{'totalHours'});
-        } elseif (property_exists($data, 'totalHours') && $data->{'totalHours'} === null) {
+        if (\array_key_exists('totalHours', $data) && $data['totalHours'] !== null) {
+            $object->setTotalHours($data['totalHours']);
+        } elseif (\array_key_exists('totalHours', $data) && $data['totalHours'] === null) {
             $object->setTotalHours(null);
         }
-        if (property_exists($data, 'totalHoursBillable') && $data->{'totalHoursBillable'} !== null) {
-            $object->setTotalHoursBillable($data->{'totalHoursBillable'});
-        } elseif (property_exists($data, 'totalHoursBillable') && $data->{'totalHoursBillable'} === null) {
+        if (\array_key_exists('totalHoursBillable', $data) && $data['totalHoursBillable'] !== null) {
+            $object->setTotalHoursBillable($data['totalHoursBillable']);
+        } elseif (\array_key_exists('totalHoursBillable', $data) && $data['totalHoursBillable'] === null) {
             $object->setTotalHoursBillable(null);
         }
-        if (property_exists($data, 'totalHoursNonBillable') && $data->{'totalHoursNonBillable'} !== null) {
-            $object->setTotalHoursNonBillable($data->{'totalHoursNonBillable'});
-        } elseif (property_exists($data, 'totalHoursNonBillable') && $data->{'totalHoursNonBillable'} === null) {
+        if (\array_key_exists('totalHoursNonBillable', $data) && $data['totalHoursNonBillable'] !== null) {
+            $object->setTotalHoursNonBillable($data['totalHoursNonBillable']);
+        } elseif (\array_key_exists('totalHoursNonBillable', $data) && $data['totalHoursNonBillable'] === null) {
             $object->setTotalHoursNonBillable(null);
         }
-        if (property_exists($data, 'totalUninvoiced') && $data->{'totalUninvoiced'} !== null) {
-            $object->setTotalUninvoiced($data->{'totalUninvoiced'});
-        } elseif (property_exists($data, 'totalUninvoiced') && $data->{'totalUninvoiced'} === null) {
+        if (\array_key_exists('totalUninvoiced', $data) && $data['totalUninvoiced'] !== null) {
+            $object->setTotalUninvoiced($data['totalUninvoiced']);
+        } elseif (\array_key_exists('totalUninvoiced', $data) && $data['totalUninvoiced'] === null) {
             $object->setTotalUninvoiced(null);
         }
-        if (property_exists($data, 'totalInvoiced') && $data->{'totalInvoiced'} !== null) {
-            $object->setTotalInvoiced($data->{'totalInvoiced'});
-        } elseif (property_exists($data, 'totalInvoiced') && $data->{'totalInvoiced'} === null) {
+        if (\array_key_exists('totalInvoiced', $data) && $data['totalInvoiced'] !== null) {
+            $object->setTotalInvoiced($data['totalInvoiced']);
+        } elseif (\array_key_exists('totalInvoiced', $data) && $data['totalInvoiced'] === null) {
             $object->setTotalInvoiced(null);
         }
-        if (property_exists($data, 'totalWrittenOff') && $data->{'totalWrittenOff'} !== null) {
-            $object->setTotalWrittenOff($data->{'totalWrittenOff'});
-        } elseif (property_exists($data, 'totalWrittenOff') && $data->{'totalWrittenOff'} === null) {
+        if (\array_key_exists('totalWrittenOff', $data) && $data['totalWrittenOff'] !== null) {
+            $object->setTotalWrittenOff($data['totalWrittenOff']);
+        } elseif (\array_key_exists('totalWrittenOff', $data) && $data['totalWrittenOff'] === null) {
             $object->setTotalWrittenOff(null);
         }
-        if (property_exists($data, 'totalScheduled') && $data->{'totalScheduled'} !== null) {
-            $object->setTotalScheduled($data->{'totalScheduled'});
-        } elseif (property_exists($data, 'totalScheduled') && $data->{'totalScheduled'} === null) {
+        if (\array_key_exists('totalScheduled', $data) && $data['totalScheduled'] !== null) {
+            $object->setTotalScheduled($data['totalScheduled']);
+        } elseif (\array_key_exists('totalScheduled', $data) && $data['totalScheduled'] === null) {
             $object->setTotalScheduled(null);
         }
-        if (property_exists($data, 'budgetPercentage') && $data->{'budgetPercentage'} !== null) {
-            $object->setBudgetPercentage($data->{'budgetPercentage'});
-        } elseif (property_exists($data, 'budgetPercentage') && $data->{'budgetPercentage'} === null) {
+        if (\array_key_exists('budgetPercentage', $data) && $data['budgetPercentage'] !== null) {
+            $object->setBudgetPercentage($data['budgetPercentage']);
+        } elseif (\array_key_exists('budgetPercentage', $data) && $data['budgetPercentage'] === null) {
             $object->setBudgetPercentage(null);
         }
-        if (property_exists($data, 'budget') && $data->{'budget'} !== null) {
-            $object->setBudget($data->{'budget'});
-        } elseif (property_exists($data, 'budget') && $data->{'budget'} === null) {
+        if (\array_key_exists('budget', $data) && $data['budget'] !== null) {
+            $object->setBudget($data['budget']);
+        } elseif (\array_key_exists('budget', $data) && $data['budget'] === null) {
             $object->setBudget(null);
         }
-        if (property_exists($data, 'spend') && $data->{'spend'} !== null) {
-            $object->setSpend($data->{'spend'});
-        } elseif (property_exists($data, 'spend') && $data->{'spend'} === null) {
+        if (\array_key_exists('spend', $data) && $data['spend'] !== null) {
+            $object->setSpend($data['spend']);
+        } elseif (\array_key_exists('spend', $data) && $data['spend'] === null) {
             $object->setSpend(null);
         }
-        if (property_exists($data, 'remainingBudget') && $data->{'remainingBudget'} !== null) {
-            $object->setRemainingBudget($data->{'remainingBudget'});
-        } elseif (property_exists($data, 'remainingBudget') && $data->{'remainingBudget'} === null) {
+        if (\array_key_exists('remainingBudget', $data) && $data['remainingBudget'] !== null) {
+            $object->setRemainingBudget($data['remainingBudget']);
+        } elseif (\array_key_exists('remainingBudget', $data) && $data['remainingBudget'] === null) {
             $object->setRemainingBudget(null);
         }
-        if (property_exists($data, 'costs') && $data->{'costs'} !== null) {
-            $object->setCosts($data->{'costs'});
-        } elseif (property_exists($data, 'costs') && $data->{'costs'} === null) {
+        if (\array_key_exists('costs', $data) && $data['costs'] !== null) {
+            $object->setCosts($data['costs']);
+        } elseif (\array_key_exists('costs', $data) && $data['costs'] === null) {
             $object->setCosts(null);
         }
 
@@ -103,66 +109,42 @@ class ProjectInsightsNormalizer implements DenormalizerInterface, NormalizerInte
 
     public function normalize($object, $format = null, array $context = [])
     {
-        $data = new \stdClass();
+        $data = [];
         if (null !== $object->getTotalHours()) {
-            $data->{'totalHours'} = $object->getTotalHours();
-        } else {
-            $data->{'totalHours'} = null;
+            $data['totalHours'] = $object->getTotalHours();
         }
         if (null !== $object->getTotalHoursBillable()) {
-            $data->{'totalHoursBillable'} = $object->getTotalHoursBillable();
-        } else {
-            $data->{'totalHoursBillable'} = null;
+            $data['totalHoursBillable'] = $object->getTotalHoursBillable();
         }
         if (null !== $object->getTotalHoursNonBillable()) {
-            $data->{'totalHoursNonBillable'} = $object->getTotalHoursNonBillable();
-        } else {
-            $data->{'totalHoursNonBillable'} = null;
+            $data['totalHoursNonBillable'] = $object->getTotalHoursNonBillable();
         }
         if (null !== $object->getTotalUninvoiced()) {
-            $data->{'totalUninvoiced'} = $object->getTotalUninvoiced();
-        } else {
-            $data->{'totalUninvoiced'} = null;
+            $data['totalUninvoiced'] = $object->getTotalUninvoiced();
         }
         if (null !== $object->getTotalInvoiced()) {
-            $data->{'totalInvoiced'} = $object->getTotalInvoiced();
-        } else {
-            $data->{'totalInvoiced'} = null;
+            $data['totalInvoiced'] = $object->getTotalInvoiced();
         }
         if (null !== $object->getTotalWrittenOff()) {
-            $data->{'totalWrittenOff'} = $object->getTotalWrittenOff();
-        } else {
-            $data->{'totalWrittenOff'} = null;
+            $data['totalWrittenOff'] = $object->getTotalWrittenOff();
         }
         if (null !== $object->getTotalScheduled()) {
-            $data->{'totalScheduled'} = $object->getTotalScheduled();
-        } else {
-            $data->{'totalScheduled'} = null;
+            $data['totalScheduled'] = $object->getTotalScheduled();
         }
         if (null !== $object->getBudgetPercentage()) {
-            $data->{'budgetPercentage'} = $object->getBudgetPercentage();
-        } else {
-            $data->{'budgetPercentage'} = null;
+            $data['budgetPercentage'] = $object->getBudgetPercentage();
         }
         if (null !== $object->getBudget()) {
-            $data->{'budget'} = $object->getBudget();
-        } else {
-            $data->{'budget'} = null;
+            $data['budget'] = $object->getBudget();
         }
         if (null !== $object->getSpend()) {
-            $data->{'spend'} = $object->getSpend();
-        } else {
-            $data->{'spend'} = null;
+            $data['spend'] = $object->getSpend();
         }
         if (null !== $object->getRemainingBudget()) {
-            $data->{'remainingBudget'} = $object->getRemainingBudget();
-        } else {
-            $data->{'remainingBudget'} = null;
+            $data['remainingBudget'] = $object->getRemainingBudget();
         }
         if (null !== $object->getCosts()) {
-            $data->{'costs'} = $object->getCosts();
-        } else {
-            $data->{'costs'} = null;
+            $data['costs'] = $object->getCosts();
         }
 
         return $data;

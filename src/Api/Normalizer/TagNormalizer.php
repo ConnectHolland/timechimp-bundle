@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace ConnectHolland\TimechimpBundle\Api\Normalizer;
 
+use Jane\JsonSchemaRuntime\Normalizer\CheckArray;
+use Jane\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -20,6 +22,7 @@ class TagNormalizer implements DenormalizerInterface, NormalizerInterface, Denor
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
+    use CheckArray;
 
     public function supportsDenormalization($data, $type, $format = null)
     {
@@ -33,28 +36,31 @@ class TagNormalizer implements DenormalizerInterface, NormalizerInterface, Denor
 
     public function denormalize($data, $class, $format = null, array $context = [])
     {
-        if (!is_object($data)) {
-            return null;
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
+        }
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \ConnectHolland\TimechimpBundle\Api\Model\Tag();
-        if (property_exists($data, 'id') && $data->{'id'} !== null) {
-            $object->setId($data->{'id'});
-        } elseif (property_exists($data, 'id') && $data->{'id'} === null) {
+        if (\array_key_exists('id', $data) && $data['id'] !== null) {
+            $object->setId($data['id']);
+        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
             $object->setId(null);
         }
-        if (property_exists($data, 'name') && $data->{'name'} !== null) {
-            $object->setName($data->{'name'});
-        } elseif (property_exists($data, 'name') && $data->{'name'} === null) {
+        if (\array_key_exists('name', $data) && $data['name'] !== null) {
+            $object->setName($data['name']);
+        } elseif (\array_key_exists('name', $data) && $data['name'] === null) {
             $object->setName(null);
         }
-        if (property_exists($data, 'active') && $data->{'active'} !== null) {
-            $object->setActive($data->{'active'});
-        } elseif (property_exists($data, 'active') && $data->{'active'} === null) {
+        if (\array_key_exists('active', $data) && $data['active'] !== null) {
+            $object->setActive($data['active']);
+        } elseif (\array_key_exists('active', $data) && $data['active'] === null) {
             $object->setActive(null);
         }
-        if (property_exists($data, 'type') && $data->{'type'} !== null) {
-            $object->setType($data->{'type'});
-        } elseif (property_exists($data, 'type') && $data->{'type'} === null) {
+        if (\array_key_exists('type', $data) && $data['type'] !== null) {
+            $object->setType($data['type']);
+        } elseif (\array_key_exists('type', $data) && $data['type'] === null) {
             $object->setType(null);
         }
 
@@ -63,26 +69,18 @@ class TagNormalizer implements DenormalizerInterface, NormalizerInterface, Denor
 
     public function normalize($object, $format = null, array $context = [])
     {
-        $data = new \stdClass();
+        $data = [];
         if (null !== $object->getId()) {
-            $data->{'id'} = $object->getId();
-        } else {
-            $data->{'id'} = null;
+            $data['id'] = $object->getId();
         }
         if (null !== $object->getName()) {
-            $data->{'name'} = $object->getName();
-        } else {
-            $data->{'name'} = null;
+            $data['name'] = $object->getName();
         }
         if (null !== $object->getActive()) {
-            $data->{'active'} = $object->getActive();
-        } else {
-            $data->{'active'} = null;
+            $data['active'] = $object->getActive();
         }
         if (null !== $object->getType()) {
-            $data->{'type'} = $object->getType();
-        } else {
-            $data->{'type'} = null;
+            $data['type'] = $object->getType();
         }
 
         return $data;

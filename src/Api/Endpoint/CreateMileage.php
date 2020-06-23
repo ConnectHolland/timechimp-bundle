@@ -49,4 +49,9 @@ class CreateMileage extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements 
             return $serializer->deserialize($body, 'ConnectHolland\\TimechimpBundle\\Api\\Model\\Mileage', 'json');
         }
     }
+
+    public function getAuthenticationScopes(): array
+    {
+        return [];
+    }
 }

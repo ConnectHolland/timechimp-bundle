@@ -51,4 +51,9 @@ class GetCustomerByName extends \Jane\OpenApiRuntime\Client\BaseEndpoint impleme
             return $serializer->deserialize($body, 'ConnectHolland\\TimechimpBundle\\Api\\Model\\Customer', 'json');
         }
     }
+
+    public function getAuthenticationScopes(): array
+    {
+        return [];
+    }
 }

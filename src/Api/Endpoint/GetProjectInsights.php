@@ -51,4 +51,9 @@ class GetProjectInsights extends \Jane\OpenApiRuntime\Client\BaseEndpoint implem
             return $serializer->deserialize($body, 'ConnectHolland\\TimechimpBundle\\Api\\Model\\ProjectInsights', 'json');
         }
     }
+
+    public function getAuthenticationScopes(): array
+    {
+        return [];
+    }
 }

@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace ConnectHolland\TimechimpBundle\Api\Authentication;
 
-class AccessTokenAuthentication implements \Jane\OpenApiRuntime\Client\Authentication
+class AccessTokenAuthentication implements \Jane\OpenApiRuntime\Client\AuthenticationPlugin
 {
     private $apiKey;
 
@@ -18,20 +18,15 @@ class AccessTokenAuthentication implements \Jane\OpenApiRuntime\Client\Authentic
         $this->{'apiKey'} = $apiKey;
     }
 
-    public function getPlugin(): \Http\Client\Common\Plugin
+    public function authentication(\Psr\Http\Message\RequestInterface $request): \Psr\Http\Message\RequestInterface
     {
-        return new \Http\Client\Common\Plugin\AuthenticationPlugin(new class($this->{'apiKey'}) implements \Http\Message\Authentication {
-            private $apiKey;
+        $request = $request->withHeader('Authorization', $this->{'apiKey'});
 
-            public function __construct(string $apiKey)
-            {
-                $this->{'apiKey'} = $apiKey;
-            }
+        return $request;
+    }
 
-            public function authenticate(\Psr\Http\Message\RequestInterface $request)
-            {
-                return $request->withHeader('Authorization', $this->{'apiKey'});
-            }
-        });
+    public function getScope(): string
+    {
+        return 'Access token';
     }
 }
