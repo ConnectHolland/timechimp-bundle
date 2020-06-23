@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace ConnectHolland\TimechimpBundle\Api;
 
-class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
+class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
 {
     /**
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
@@ -627,22 +627,22 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr7HttplugClient
         return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\Me(), $fetch);
     }
 
-    public static function create($httpClient = null, \Jane\OpenApiRuntime\Client\Authentication $authentication = null)
+    public static function create($httpClient = null, array $additionalPlugins = [])
     {
         if (null === $httpClient) {
-            $httpClient = \Http\Discovery\HttpClientDiscovery::find();
+            $httpClient = \Http\Discovery\Psr18ClientDiscovery::find();
             $plugins    = [];
-            $uri        = \Http\Discovery\UriFactoryDiscovery::find()->createUri('https://api.timechimp.com');
+            $uri        = \Http\Discovery\Psr17FactoryDiscovery::findUrlFactory()->createUri('https://api.timechimp.com');
             $plugins[]  = new \Http\Client\Common\Plugin\AddHostPlugin($uri);
-            if (null !== $authentication) {
-                $plugins[] = $authentication->getPlugin();
+            if (count($additionalPlugins) > 0) {
+                $plugins = array_merge($plugins, $additionalPlugins);
             }
             $httpClient = new \Http\Client\Common\PluginClient($httpClient, $plugins);
         }
-        $messageFactory = \Http\Discovery\MessageFactoryDiscovery::find();
-        $streamFactory  = \Http\Discovery\StreamFactoryDiscovery::find();
-        $serializer     = new \Symfony\Component\Serializer\Serializer([new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new \ConnectHolland\TimechimpBundle\Api\Normalizer\JaneObjectNormalizer()], [new \Symfony\Component\Serializer\Encoder\JsonEncoder(new \Symfony\Component\Serializer\Encoder\JsonEncode(), new \Symfony\Component\Serializer\Encoder\JsonDecode())]);
+        $requestFactory = \Http\Discovery\Psr17FactoryDiscovery::findRequestFactory();
+        $streamFactory  = \Http\Discovery\Psr17FactoryDiscovery::findStreamFactory();
+        $serializer     = new \Symfony\Component\Serializer\Serializer([new \Symfony\Component\Serializer\Normalizer\ArrayDenormalizer(), new \ConnectHolland\TimechimpBundle\Api\Normalizer\JaneObjectNormalizer()], [new \Symfony\Component\Serializer\Encoder\JsonEncoder(new \Symfony\Component\Serializer\Encoder\JsonEncode(), new \Symfony\Component\Serializer\Encoder\JsonDecode(['json_decode_associative' => true]))]);
 
-        return new static($httpClient, $messageFactory, $serializer, $streamFactory);
+        return new static($httpClient, $requestFactory, $serializer, $streamFactory);
     }
 }

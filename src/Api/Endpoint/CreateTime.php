@@ -49,4 +49,9 @@ class CreateTime extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Ja
             return $serializer->deserialize($body, 'ConnectHolland\\TimechimpBundle\\Api\\Model\\Time', 'json');
         }
     }
+
+    public function getAuthenticationScopes(): array
+    {
+        return [];
+    }
 }

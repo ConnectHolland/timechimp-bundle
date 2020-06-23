@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace ConnectHolland\TimechimpBundle\Api\Normalizer;
 
+use Jane\JsonSchemaRuntime\Normalizer\CheckArray;
+use Jane\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -20,6 +22,7 @@ class TaskNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
+    use CheckArray;
 
     public function supportsDenormalization($data, $type, $format = null)
     {
@@ -33,48 +36,51 @@ class TaskNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
 
     public function denormalize($data, $class, $format = null, array $context = [])
     {
-        if (!is_object($data)) {
-            return null;
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
+        }
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \ConnectHolland\TimechimpBundle\Api\Model\Task();
-        if (property_exists($data, 'id') && $data->{'id'} !== null) {
-            $object->setId($data->{'id'});
-        } elseif (property_exists($data, 'id') && $data->{'id'} === null) {
+        if (\array_key_exists('id', $data) && $data['id'] !== null) {
+            $object->setId($data['id']);
+        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
             $object->setId(null);
         }
-        if (property_exists($data, 'active') && $data->{'active'} !== null) {
-            $object->setActive($data->{'active'});
-        } elseif (property_exists($data, 'active') && $data->{'active'} === null) {
+        if (\array_key_exists('active', $data) && $data['active'] !== null) {
+            $object->setActive($data['active']);
+        } elseif (\array_key_exists('active', $data) && $data['active'] === null) {
             $object->setActive(null);
         }
-        if (property_exists($data, 'name') && $data->{'name'} !== null) {
-            $object->setName($data->{'name'});
-        } elseif (property_exists($data, 'name') && $data->{'name'} === null) {
+        if (\array_key_exists('name', $data) && $data['name'] !== null) {
+            $object->setName($data['name']);
+        } elseif (\array_key_exists('name', $data) && $data['name'] === null) {
             $object->setName(null);
         }
-        if (property_exists($data, 'code') && $data->{'code'} !== null) {
-            $object->setCode($data->{'code'});
-        } elseif (property_exists($data, 'code') && $data->{'code'} === null) {
+        if (\array_key_exists('code', $data) && $data['code'] !== null) {
+            $object->setCode($data['code']);
+        } elseif (\array_key_exists('code', $data) && $data['code'] === null) {
             $object->setCode(null);
         }
-        if (property_exists($data, 'hourlyRate') && $data->{'hourlyRate'} !== null) {
-            $object->setHourlyRate($data->{'hourlyRate'});
-        } elseif (property_exists($data, 'hourlyRate') && $data->{'hourlyRate'} === null) {
+        if (\array_key_exists('hourlyRate', $data) && $data['hourlyRate'] !== null) {
+            $object->setHourlyRate($data['hourlyRate']);
+        } elseif (\array_key_exists('hourlyRate', $data) && $data['hourlyRate'] === null) {
             $object->setHourlyRate(null);
         }
-        if (property_exists($data, 'billable') && $data->{'billable'} !== null) {
-            $object->setBillable($data->{'billable'});
-        } elseif (property_exists($data, 'billable') && $data->{'billable'} === null) {
+        if (\array_key_exists('billable', $data) && $data['billable'] !== null) {
+            $object->setBillable($data['billable']);
+        } elseif (\array_key_exists('billable', $data) && $data['billable'] === null) {
             $object->setBillable(null);
         }
-        if (property_exists($data, 'common') && $data->{'common'} !== null) {
-            $object->setCommon($data->{'common'});
-        } elseif (property_exists($data, 'common') && $data->{'common'} === null) {
+        if (\array_key_exists('common', $data) && $data['common'] !== null) {
+            $object->setCommon($data['common']);
+        } elseif (\array_key_exists('common', $data) && $data['common'] === null) {
             $object->setCommon(null);
         }
-        if (property_exists($data, 'unspecified') && $data->{'unspecified'} !== null) {
-            $object->setUnspecified($data->{'unspecified'});
-        } elseif (property_exists($data, 'unspecified') && $data->{'unspecified'} === null) {
+        if (\array_key_exists('unspecified', $data) && $data['unspecified'] !== null) {
+            $object->setUnspecified($data['unspecified']);
+        } elseif (\array_key_exists('unspecified', $data) && $data['unspecified'] === null) {
             $object->setUnspecified(null);
         }
 
@@ -83,46 +89,30 @@ class TaskNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
 
     public function normalize($object, $format = null, array $context = [])
     {
-        $data = new \stdClass();
+        $data = [];
         if (null !== $object->getId()) {
-            $data->{'id'} = $object->getId();
-        } else {
-            $data->{'id'} = null;
+            $data['id'] = $object->getId();
         }
         if (null !== $object->getActive()) {
-            $data->{'active'} = $object->getActive();
-        } else {
-            $data->{'active'} = null;
+            $data['active'] = $object->getActive();
         }
         if (null !== $object->getName()) {
-            $data->{'name'} = $object->getName();
-        } else {
-            $data->{'name'} = null;
+            $data['name'] = $object->getName();
         }
         if (null !== $object->getCode()) {
-            $data->{'code'} = $object->getCode();
-        } else {
-            $data->{'code'} = null;
+            $data['code'] = $object->getCode();
         }
         if (null !== $object->getHourlyRate()) {
-            $data->{'hourlyRate'} = $object->getHourlyRate();
-        } else {
-            $data->{'hourlyRate'} = null;
+            $data['hourlyRate'] = $object->getHourlyRate();
         }
         if (null !== $object->getBillable()) {
-            $data->{'billable'} = $object->getBillable();
-        } else {
-            $data->{'billable'} = null;
+            $data['billable'] = $object->getBillable();
         }
         if (null !== $object->getCommon()) {
-            $data->{'common'} = $object->getCommon();
-        } else {
-            $data->{'common'} = null;
+            $data['common'] = $object->getCommon();
         }
         if (null !== $object->getUnspecified()) {
-            $data->{'unspecified'} = $object->getUnspecified();
-        } else {
-            $data->{'unspecified'} = null;
+            $data['unspecified'] = $object->getUnspecified();
         }
 
         return $data;

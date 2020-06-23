@@ -57,4 +57,9 @@ class GetTimeByDateRange extends \Jane\OpenApiRuntime\Client\BaseEndpoint implem
             return $serializer->deserialize($body, 'ConnectHolland\\TimechimpBundle\\Api\\Model\\Time[]', 'json');
         }
     }
+
+    public function getAuthenticationScopes(): array
+    {
+        return [];
+    }
 }

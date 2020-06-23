@@ -66,4 +66,9 @@ class DeleteTag extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jan
             return null;
         }
     }
+
+    public function getAuthenticationScopes(): array
+    {
+        return [];
+    }
 }

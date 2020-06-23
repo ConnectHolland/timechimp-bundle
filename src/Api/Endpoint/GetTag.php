@@ -51,4 +51,9 @@ class GetTag extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\O
             return $serializer->deserialize($body, 'ConnectHolland\\TimechimpBundle\\Api\\Model\\Tag', 'json');
         }
     }
+
+    public function getAuthenticationScopes(): array
+    {
+        return [];
+    }
 }

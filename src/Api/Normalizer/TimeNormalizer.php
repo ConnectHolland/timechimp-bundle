@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace ConnectHolland\TimechimpBundle\Api\Normalizer;
 
+use Jane\JsonSchemaRuntime\Normalizer\CheckArray;
+use Jane\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -20,6 +22,7 @@ class TimeNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
+    use CheckArray;
 
     public function supportsDenormalization($data, $type, $format = null)
     {
@@ -33,136 +36,139 @@ class TimeNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
 
     public function denormalize($data, $class, $format = null, array $context = [])
     {
-        if (!is_object($data)) {
-            return null;
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
+        }
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \ConnectHolland\TimechimpBundle\Api\Model\Time();
-        if (property_exists($data, 'id') && $data->{'id'} !== null) {
-            $object->setId($data->{'id'});
-        } elseif (property_exists($data, 'id') && $data->{'id'} === null) {
+        if (\array_key_exists('id', $data) && $data['id'] !== null) {
+            $object->setId($data['id']);
+        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
             $object->setId(null);
         }
-        if (property_exists($data, 'customerId') && $data->{'customerId'} !== null) {
-            $object->setCustomerId($data->{'customerId'});
-        } elseif (property_exists($data, 'customerId') && $data->{'customerId'} === null) {
+        if (\array_key_exists('customerId', $data) && $data['customerId'] !== null) {
+            $object->setCustomerId($data['customerId']);
+        } elseif (\array_key_exists('customerId', $data) && $data['customerId'] === null) {
             $object->setCustomerId(null);
         }
-        if (property_exists($data, 'customerName') && $data->{'customerName'} !== null) {
-            $object->setCustomerName($data->{'customerName'});
-        } elseif (property_exists($data, 'customerName') && $data->{'customerName'} === null) {
+        if (\array_key_exists('customerName', $data) && $data['customerName'] !== null) {
+            $object->setCustomerName($data['customerName']);
+        } elseif (\array_key_exists('customerName', $data) && $data['customerName'] === null) {
             $object->setCustomerName(null);
         }
-        if (property_exists($data, 'projectId') && $data->{'projectId'} !== null) {
-            $object->setProjectId($data->{'projectId'});
-        } elseif (property_exists($data, 'projectId') && $data->{'projectId'} === null) {
+        if (\array_key_exists('projectId', $data) && $data['projectId'] !== null) {
+            $object->setProjectId($data['projectId']);
+        } elseif (\array_key_exists('projectId', $data) && $data['projectId'] === null) {
             $object->setProjectId(null);
         }
-        if (property_exists($data, 'projectName') && $data->{'projectName'} !== null) {
-            $object->setProjectName($data->{'projectName'});
-        } elseif (property_exists($data, 'projectName') && $data->{'projectName'} === null) {
+        if (\array_key_exists('projectName', $data) && $data['projectName'] !== null) {
+            $object->setProjectName($data['projectName']);
+        } elseif (\array_key_exists('projectName', $data) && $data['projectName'] === null) {
             $object->setProjectName(null);
         }
-        if (property_exists($data, 'projectTaskId') && $data->{'projectTaskId'} !== null) {
-            $object->setProjectTaskId($data->{'projectTaskId'});
-        } elseif (property_exists($data, 'projectTaskId') && $data->{'projectTaskId'} === null) {
+        if (\array_key_exists('projectTaskId', $data) && $data['projectTaskId'] !== null) {
+            $object->setProjectTaskId($data['projectTaskId']);
+        } elseif (\array_key_exists('projectTaskId', $data) && $data['projectTaskId'] === null) {
             $object->setProjectTaskId(null);
         }
-        if (property_exists($data, 'taskId') && $data->{'taskId'} !== null) {
-            $object->setTaskId($data->{'taskId'});
-        } elseif (property_exists($data, 'taskId') && $data->{'taskId'} === null) {
+        if (\array_key_exists('taskId', $data) && $data['taskId'] !== null) {
+            $object->setTaskId($data['taskId']);
+        } elseif (\array_key_exists('taskId', $data) && $data['taskId'] === null) {
             $object->setTaskId(null);
         }
-        if (property_exists($data, 'taskName') && $data->{'taskName'} !== null) {
-            $object->setTaskName($data->{'taskName'});
-        } elseif (property_exists($data, 'taskName') && $data->{'taskName'} === null) {
+        if (\array_key_exists('taskName', $data) && $data['taskName'] !== null) {
+            $object->setTaskName($data['taskName']);
+        } elseif (\array_key_exists('taskName', $data) && $data['taskName'] === null) {
             $object->setTaskName(null);
         }
-        if (property_exists($data, 'userId') && $data->{'userId'} !== null) {
-            $object->setUserId($data->{'userId'});
-        } elseif (property_exists($data, 'userId') && $data->{'userId'} === null) {
+        if (\array_key_exists('userId', $data) && $data['userId'] !== null) {
+            $object->setUserId($data['userId']);
+        } elseif (\array_key_exists('userId', $data) && $data['userId'] === null) {
             $object->setUserId(null);
         }
-        if (property_exists($data, 'userDisplayName') && $data->{'userDisplayName'} !== null) {
-            $object->setUserDisplayName($data->{'userDisplayName'});
-        } elseif (property_exists($data, 'userDisplayName') && $data->{'userDisplayName'} === null) {
+        if (\array_key_exists('userDisplayName', $data) && $data['userDisplayName'] !== null) {
+            $object->setUserDisplayName($data['userDisplayName']);
+        } elseif (\array_key_exists('userDisplayName', $data) && $data['userDisplayName'] === null) {
             $object->setUserDisplayName(null);
         }
-        if (property_exists($data, 'userTags') && $data->{'userTags'} !== null) {
+        if (\array_key_exists('userTags', $data) && $data['userTags'] !== null) {
             $values = [];
-            foreach ($data->{'userTags'} as $value) {
+            foreach ($data['userTags'] as $value) {
                 $values[] = $value;
             }
             $object->setUserTags($values);
-        } elseif (property_exists($data, 'userTags') && $data->{'userTags'} === null) {
+        } elseif (\array_key_exists('userTags', $data) && $data['userTags'] === null) {
             $object->setUserTags(null);
         }
-        if (property_exists($data, 'date') && $data->{'date'} !== null) {
-            $object->setDate(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data->{'date'}));
-        } elseif (property_exists($data, 'date') && $data->{'date'} === null) {
+        if (\array_key_exists('date', $data) && $data['date'] !== null) {
+            $object->setDate(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data['date']));
+        } elseif (\array_key_exists('date', $data) && $data['date'] === null) {
             $object->setDate(null);
         }
-        if (property_exists($data, 'hours') && $data->{'hours'} !== null) {
-            $object->setHours($data->{'hours'});
-        } elseif (property_exists($data, 'hours') && $data->{'hours'} === null) {
+        if (\array_key_exists('hours', $data) && $data['hours'] !== null) {
+            $object->setHours($data['hours']);
+        } elseif (\array_key_exists('hours', $data) && $data['hours'] === null) {
             $object->setHours(null);
         }
-        if (property_exists($data, 'notes') && $data->{'notes'} !== null) {
-            $object->setNotes($data->{'notes'});
-        } elseif (property_exists($data, 'notes') && $data->{'notes'} === null) {
+        if (\array_key_exists('notes', $data) && $data['notes'] !== null) {
+            $object->setNotes($data['notes']);
+        } elseif (\array_key_exists('notes', $data) && $data['notes'] === null) {
             $object->setNotes(null);
         }
-        if (property_exists($data, 'status') && $data->{'status'} !== null) {
-            $object->setStatus($data->{'status'});
-        } elseif (property_exists($data, 'status') && $data->{'status'} === null) {
+        if (\array_key_exists('status', $data) && $data['status'] !== null) {
+            $object->setStatus($data['status']);
+        } elseif (\array_key_exists('status', $data) && $data['status'] === null) {
             $object->setStatus(null);
         }
-        if (property_exists($data, 'startEnd') && $data->{'startEnd'} !== null) {
-            $object->setStartEnd($data->{'startEnd'});
-        } elseif (property_exists($data, 'startEnd') && $data->{'startEnd'} === null) {
+        if (\array_key_exists('startEnd', $data) && $data['startEnd'] !== null) {
+            $object->setStartEnd($data['startEnd']);
+        } elseif (\array_key_exists('startEnd', $data) && $data['startEnd'] === null) {
             $object->setStartEnd(null);
         }
-        if (property_exists($data, 'start') && $data->{'start'} !== null) {
-            $object->setStart($data->{'start'});
-        } elseif (property_exists($data, 'start') && $data->{'start'} === null) {
+        if (\array_key_exists('start', $data) && $data['start'] !== null) {
+            $object->setStart($data['start']);
+        } elseif (\array_key_exists('start', $data) && $data['start'] === null) {
             $object->setStart(null);
         }
-        if (property_exists($data, 'end') && $data->{'end'} !== null) {
-            $object->setEnd($data->{'end'});
-        } elseif (property_exists($data, 'end') && $data->{'end'} === null) {
+        if (\array_key_exists('end', $data) && $data['end'] !== null) {
+            $object->setEnd($data['end']);
+        } elseif (\array_key_exists('end', $data) && $data['end'] === null) {
             $object->setEnd(null);
         }
-        if (property_exists($data, 'pause') && $data->{'pause'} !== null) {
-            $object->setPause($data->{'pause'});
-        } elseif (property_exists($data, 'pause') && $data->{'pause'} === null) {
+        if (\array_key_exists('pause', $data) && $data['pause'] !== null) {
+            $object->setPause($data['pause']);
+        } elseif (\array_key_exists('pause', $data) && $data['pause'] === null) {
             $object->setPause(null);
         }
-        if (property_exists($data, 'externalName') && $data->{'externalName'} !== null) {
-            $object->setExternalName($data->{'externalName'});
-        } elseif (property_exists($data, 'externalName') && $data->{'externalName'} === null) {
+        if (\array_key_exists('externalName', $data) && $data['externalName'] !== null) {
+            $object->setExternalName($data['externalName']);
+        } elseif (\array_key_exists('externalName', $data) && $data['externalName'] === null) {
             $object->setExternalName(null);
         }
-        if (property_exists($data, 'externalUrl') && $data->{'externalUrl'} !== null) {
-            $object->setExternalUrl($data->{'externalUrl'});
-        } elseif (property_exists($data, 'externalUrl') && $data->{'externalUrl'} === null) {
+        if (\array_key_exists('externalUrl', $data) && $data['externalUrl'] !== null) {
+            $object->setExternalUrl($data['externalUrl']);
+        } elseif (\array_key_exists('externalUrl', $data) && $data['externalUrl'] === null) {
             $object->setExternalUrl(null);
         }
-        if (property_exists($data, 'statusIntern') && $data->{'statusIntern'} !== null) {
-            $object->setStatusIntern($data->{'statusIntern'});
-        } elseif (property_exists($data, 'statusIntern') && $data->{'statusIntern'} === null) {
+        if (\array_key_exists('statusIntern', $data) && $data['statusIntern'] !== null) {
+            $object->setStatusIntern($data['statusIntern']);
+        } elseif (\array_key_exists('statusIntern', $data) && $data['statusIntern'] === null) {
             $object->setStatusIntern(null);
         }
-        if (property_exists($data, 'statusExtern') && $data->{'statusExtern'} !== null) {
-            $object->setStatusExtern($data->{'statusExtern'});
-        } elseif (property_exists($data, 'statusExtern') && $data->{'statusExtern'} === null) {
+        if (\array_key_exists('statusExtern', $data) && $data['statusExtern'] !== null) {
+            $object->setStatusExtern($data['statusExtern']);
+        } elseif (\array_key_exists('statusExtern', $data) && $data['statusExtern'] === null) {
             $object->setStatusExtern(null);
         }
-        if (property_exists($data, 'tags') && $data->{'tags'} !== null) {
+        if (\array_key_exists('tags', $data) && $data['tags'] !== null) {
             $values_1 = [];
-            foreach ($data->{'tags'} as $value_1) {
+            foreach ($data['tags'] as $value_1) {
                 $values_1[] = $this->denormalizer->denormalize($value_1, 'ConnectHolland\\TimechimpBundle\\Api\\Model\\Tag', 'json', $context);
             }
             $object->setTags($values_1);
-        } elseif (property_exists($data, 'tags') && $data->{'tags'} === null) {
+        } elseif (\array_key_exists('tags', $data) && $data['tags'] === null) {
             $object->setTags(null);
         }
 
@@ -171,134 +177,86 @@ class TimeNormalizer implements DenormalizerInterface, NormalizerInterface, Deno
 
     public function normalize($object, $format = null, array $context = [])
     {
-        $data = new \stdClass();
+        $data = [];
         if (null !== $object->getId()) {
-            $data->{'id'} = $object->getId();
-        } else {
-            $data->{'id'} = null;
+            $data['id'] = $object->getId();
         }
         if (null !== $object->getCustomerId()) {
-            $data->{'customerId'} = $object->getCustomerId();
-        } else {
-            $data->{'customerId'} = null;
+            $data['customerId'] = $object->getCustomerId();
         }
         if (null !== $object->getCustomerName()) {
-            $data->{'customerName'} = $object->getCustomerName();
-        } else {
-            $data->{'customerName'} = null;
+            $data['customerName'] = $object->getCustomerName();
         }
         if (null !== $object->getProjectId()) {
-            $data->{'projectId'} = $object->getProjectId();
-        } else {
-            $data->{'projectId'} = null;
+            $data['projectId'] = $object->getProjectId();
         }
         if (null !== $object->getProjectName()) {
-            $data->{'projectName'} = $object->getProjectName();
-        } else {
-            $data->{'projectName'} = null;
+            $data['projectName'] = $object->getProjectName();
         }
         if (null !== $object->getProjectTaskId()) {
-            $data->{'projectTaskId'} = $object->getProjectTaskId();
-        } else {
-            $data->{'projectTaskId'} = null;
+            $data['projectTaskId'] = $object->getProjectTaskId();
         }
         if (null !== $object->getTaskId()) {
-            $data->{'taskId'} = $object->getTaskId();
-        } else {
-            $data->{'taskId'} = null;
+            $data['taskId'] = $object->getTaskId();
         }
         if (null !== $object->getTaskName()) {
-            $data->{'taskName'} = $object->getTaskName();
-        } else {
-            $data->{'taskName'} = null;
+            $data['taskName'] = $object->getTaskName();
         }
         if (null !== $object->getUserId()) {
-            $data->{'userId'} = $object->getUserId();
-        } else {
-            $data->{'userId'} = null;
+            $data['userId'] = $object->getUserId();
         }
         if (null !== $object->getUserDisplayName()) {
-            $data->{'userDisplayName'} = $object->getUserDisplayName();
-        } else {
-            $data->{'userDisplayName'} = null;
+            $data['userDisplayName'] = $object->getUserDisplayName();
         }
         if (null !== $object->getUserTags()) {
             $values = [];
             foreach ($object->getUserTags() as $value) {
                 $values[] = $value;
             }
-            $data->{'userTags'} = $values;
-        } else {
-            $data->{'userTags'} = null;
+            $data['userTags'] = $values;
         }
         if (null !== $object->getDate()) {
-            $data->{'date'} = $object->getDate()->format('Y-m-d\\TH:i:s');
-        } else {
-            $data->{'date'} = null;
+            $data['date'] = $object->getDate()->format('Y-m-d\\TH:i:s');
         }
         if (null !== $object->getHours()) {
-            $data->{'hours'} = $object->getHours();
-        } else {
-            $data->{'hours'} = null;
+            $data['hours'] = $object->getHours();
         }
         if (null !== $object->getNotes()) {
-            $data->{'notes'} = $object->getNotes();
-        } else {
-            $data->{'notes'} = null;
+            $data['notes'] = $object->getNotes();
         }
         if (null !== $object->getStatus()) {
-            $data->{'status'} = $object->getStatus();
-        } else {
-            $data->{'status'} = null;
+            $data['status'] = $object->getStatus();
         }
         if (null !== $object->getStartEnd()) {
-            $data->{'startEnd'} = $object->getStartEnd();
-        } else {
-            $data->{'startEnd'} = null;
+            $data['startEnd'] = $object->getStartEnd();
         }
         if (null !== $object->getStart()) {
-            $data->{'start'} = $object->getStart();
-        } else {
-            $data->{'start'} = null;
+            $data['start'] = $object->getStart();
         }
         if (null !== $object->getEnd()) {
-            $data->{'end'} = $object->getEnd();
-        } else {
-            $data->{'end'} = null;
+            $data['end'] = $object->getEnd();
         }
         if (null !== $object->getPause()) {
-            $data->{'pause'} = $object->getPause();
-        } else {
-            $data->{'pause'} = null;
+            $data['pause'] = $object->getPause();
         }
         if (null !== $object->getExternalName()) {
-            $data->{'externalName'} = $object->getExternalName();
-        } else {
-            $data->{'externalName'} = null;
+            $data['externalName'] = $object->getExternalName();
         }
         if (null !== $object->getExternalUrl()) {
-            $data->{'externalUrl'} = $object->getExternalUrl();
-        } else {
-            $data->{'externalUrl'} = null;
+            $data['externalUrl'] = $object->getExternalUrl();
         }
         if (null !== $object->getStatusIntern()) {
-            $data->{'statusIntern'} = $object->getStatusIntern();
-        } else {
-            $data->{'statusIntern'} = null;
+            $data['statusIntern'] = $object->getStatusIntern();
         }
         if (null !== $object->getStatusExtern()) {
-            $data->{'statusExtern'} = $object->getStatusExtern();
-        } else {
-            $data->{'statusExtern'} = null;
+            $data['statusExtern'] = $object->getStatusExtern();
         }
         if (null !== $object->getTags()) {
             $values_1 = [];
             foreach ($object->getTags() as $value_1) {
                 $values_1[] = $this->normalizer->normalize($value_1, 'json', $context);
             }
-            $data->{'tags'} = $values_1;
-        } else {
-            $data->{'tags'} = null;
+            $data['tags'] = $values_1;
         }
 
         return $data;

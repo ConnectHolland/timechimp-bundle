@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace ConnectHolland\TimechimpBundle\Api\Normalizer;
 
+use Jane\JsonSchemaRuntime\Normalizer\CheckArray;
+use Jane\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -20,6 +22,7 @@ class ProjectNoteNormalizer implements DenormalizerInterface, NormalizerInterfac
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
+    use CheckArray;
 
     public function supportsDenormalization($data, $type, $format = null)
     {
@@ -33,28 +36,31 @@ class ProjectNoteNormalizer implements DenormalizerInterface, NormalizerInterfac
 
     public function denormalize($data, $class, $format = null, array $context = [])
     {
-        if (!is_object($data)) {
-            return null;
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
+        }
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \ConnectHolland\TimechimpBundle\Api\Model\ProjectNote();
-        if (property_exists($data, 'id') && $data->{'id'} !== null) {
-            $object->setId($data->{'id'});
-        } elseif (property_exists($data, 'id') && $data->{'id'} === null) {
+        if (\array_key_exists('id', $data) && $data['id'] !== null) {
+            $object->setId($data['id']);
+        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
             $object->setId(null);
         }
-        if (property_exists($data, 'description') && $data->{'description'} !== null) {
-            $object->setDescription($data->{'description'});
-        } elseif (property_exists($data, 'description') && $data->{'description'} === null) {
+        if (\array_key_exists('description', $data) && $data['description'] !== null) {
+            $object->setDescription($data['description']);
+        } elseif (\array_key_exists('description', $data) && $data['description'] === null) {
             $object->setDescription(null);
         }
-        if (property_exists($data, 'date') && $data->{'date'} !== null) {
-            $object->setDate(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data->{'date'}));
-        } elseif (property_exists($data, 'date') && $data->{'date'} === null) {
+        if (\array_key_exists('date', $data) && $data['date'] !== null) {
+            $object->setDate(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data['date']));
+        } elseif (\array_key_exists('date', $data) && $data['date'] === null) {
             $object->setDate(null);
         }
-        if (property_exists($data, 'projectId') && $data->{'projectId'} !== null) {
-            $object->setProjectId($data->{'projectId'});
-        } elseif (property_exists($data, 'projectId') && $data->{'projectId'} === null) {
+        if (\array_key_exists('projectId', $data) && $data['projectId'] !== null) {
+            $object->setProjectId($data['projectId']);
+        } elseif (\array_key_exists('projectId', $data) && $data['projectId'] === null) {
             $object->setProjectId(null);
         }
 
@@ -63,26 +69,18 @@ class ProjectNoteNormalizer implements DenormalizerInterface, NormalizerInterfac
 
     public function normalize($object, $format = null, array $context = [])
     {
-        $data = new \stdClass();
+        $data = [];
         if (null !== $object->getId()) {
-            $data->{'id'} = $object->getId();
-        } else {
-            $data->{'id'} = null;
+            $data['id'] = $object->getId();
         }
         if (null !== $object->getDescription()) {
-            $data->{'description'} = $object->getDescription();
-        } else {
-            $data->{'description'} = null;
+            $data['description'] = $object->getDescription();
         }
         if (null !== $object->getDate()) {
-            $data->{'date'} = $object->getDate()->format('Y-m-d\\TH:i:s');
-        } else {
-            $data->{'date'} = null;
+            $data['date'] = $object->getDate()->format('Y-m-d\\TH:i:s');
         }
         if (null !== $object->getProjectId()) {
-            $data->{'projectId'} = $object->getProjectId();
-        } else {
-            $data->{'projectId'} = null;
+            $data['projectId'] = $object->getProjectId();
         }
 
         return $data;

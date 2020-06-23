@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace ConnectHolland\TimechimpBundle\Api\Normalizer;
 
+use Jane\JsonSchemaRuntime\Normalizer\CheckArray;
+use Jane\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -20,6 +22,7 @@ class ProjectUserNormalizer implements DenormalizerInterface, NormalizerInterfac
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
+    use CheckArray;
 
     public function supportsDenormalization($data, $type, $format = null)
     {
@@ -33,38 +36,41 @@ class ProjectUserNormalizer implements DenormalizerInterface, NormalizerInterfac
 
     public function denormalize($data, $class, $format = null, array $context = [])
     {
-        if (!is_object($data)) {
-            return null;
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
+        }
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \ConnectHolland\TimechimpBundle\Api\Model\ProjectUser();
-        if (property_exists($data, 'id') && $data->{'id'} !== null) {
-            $object->setId($data->{'id'});
-        } elseif (property_exists($data, 'id') && $data->{'id'} === null) {
+        if (\array_key_exists('id', $data) && $data['id'] !== null) {
+            $object->setId($data['id']);
+        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
             $object->setId(null);
         }
-        if (property_exists($data, 'userId') && $data->{'userId'} !== null) {
-            $object->setUserId($data->{'userId'});
-        } elseif (property_exists($data, 'userId') && $data->{'userId'} === null) {
+        if (\array_key_exists('userId', $data) && $data['userId'] !== null) {
+            $object->setUserId($data['userId']);
+        } elseif (\array_key_exists('userId', $data) && $data['userId'] === null) {
             $object->setUserId(null);
         }
-        if (property_exists($data, 'userDisplayName') && $data->{'userDisplayName'} !== null) {
-            $object->setUserDisplayName($data->{'userDisplayName'});
-        } elseif (property_exists($data, 'userDisplayName') && $data->{'userDisplayName'} === null) {
+        if (\array_key_exists('userDisplayName', $data) && $data['userDisplayName'] !== null) {
+            $object->setUserDisplayName($data['userDisplayName']);
+        } elseif (\array_key_exists('userDisplayName', $data) && $data['userDisplayName'] === null) {
             $object->setUserDisplayName(null);
         }
-        if (property_exists($data, 'hourlyRate') && $data->{'hourlyRate'} !== null) {
-            $object->setHourlyRate($data->{'hourlyRate'});
-        } elseif (property_exists($data, 'hourlyRate') && $data->{'hourlyRate'} === null) {
+        if (\array_key_exists('hourlyRate', $data) && $data['hourlyRate'] !== null) {
+            $object->setHourlyRate($data['hourlyRate']);
+        } elseif (\array_key_exists('hourlyRate', $data) && $data['hourlyRate'] === null) {
             $object->setHourlyRate(null);
         }
-        if (property_exists($data, 'budgetHours') && $data->{'budgetHours'} !== null) {
-            $object->setBudgetHours($data->{'budgetHours'});
-        } elseif (property_exists($data, 'budgetHours') && $data->{'budgetHours'} === null) {
+        if (\array_key_exists('budgetHours', $data) && $data['budgetHours'] !== null) {
+            $object->setBudgetHours($data['budgetHours']);
+        } elseif (\array_key_exists('budgetHours', $data) && $data['budgetHours'] === null) {
             $object->setBudgetHours(null);
         }
-        if (property_exists($data, 'projectManager') && $data->{'projectManager'} !== null) {
-            $object->setProjectManager($data->{'projectManager'});
-        } elseif (property_exists($data, 'projectManager') && $data->{'projectManager'} === null) {
+        if (\array_key_exists('projectManager', $data) && $data['projectManager'] !== null) {
+            $object->setProjectManager($data['projectManager']);
+        } elseif (\array_key_exists('projectManager', $data) && $data['projectManager'] === null) {
             $object->setProjectManager(null);
         }
 
@@ -73,36 +79,24 @@ class ProjectUserNormalizer implements DenormalizerInterface, NormalizerInterfac
 
     public function normalize($object, $format = null, array $context = [])
     {
-        $data = new \stdClass();
+        $data = [];
         if (null !== $object->getId()) {
-            $data->{'id'} = $object->getId();
-        } else {
-            $data->{'id'} = null;
+            $data['id'] = $object->getId();
         }
         if (null !== $object->getUserId()) {
-            $data->{'userId'} = $object->getUserId();
-        } else {
-            $data->{'userId'} = null;
+            $data['userId'] = $object->getUserId();
         }
         if (null !== $object->getUserDisplayName()) {
-            $data->{'userDisplayName'} = $object->getUserDisplayName();
-        } else {
-            $data->{'userDisplayName'} = null;
+            $data['userDisplayName'] = $object->getUserDisplayName();
         }
         if (null !== $object->getHourlyRate()) {
-            $data->{'hourlyRate'} = $object->getHourlyRate();
-        } else {
-            $data->{'hourlyRate'} = null;
+            $data['hourlyRate'] = $object->getHourlyRate();
         }
         if (null !== $object->getBudgetHours()) {
-            $data->{'budgetHours'} = $object->getBudgetHours();
-        } else {
-            $data->{'budgetHours'} = null;
+            $data['budgetHours'] = $object->getBudgetHours();
         }
         if (null !== $object->getProjectManager()) {
-            $data->{'projectManager'} = $object->getProjectManager();
-        } else {
-            $data->{'projectManager'} = null;
+            $data['projectManager'] = $object->getProjectManager();
         }
 
         return $data;

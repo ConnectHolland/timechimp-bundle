@@ -9,6 +9,8 @@ declare(strict_types=1);
 
 namespace ConnectHolland\TimechimpBundle\Api\Normalizer;
 
+use Jane\JsonSchemaRuntime\Normalizer\CheckArray;
+use Jane\JsonSchemaRuntime\Reference;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareInterface;
 use Symfony\Component\Serializer\Normalizer\DenormalizerAwareTrait;
 use Symfony\Component\Serializer\Normalizer\DenormalizerInterface;
@@ -20,6 +22,7 @@ class ProjectNormalizer implements DenormalizerInterface, NormalizerInterface, D
 {
     use DenormalizerAwareTrait;
     use NormalizerAwareTrait;
+    use CheckArray;
 
     public function supportsDenormalization($data, $type, $format = null)
     {
@@ -33,194 +36,197 @@ class ProjectNormalizer implements DenormalizerInterface, NormalizerInterface, D
 
     public function denormalize($data, $class, $format = null, array $context = [])
     {
-        if (!is_object($data)) {
-            return null;
+        if (isset($data['$ref'])) {
+            return new Reference($data['$ref'], $context['document-origin']);
+        }
+        if (isset($data['$recursiveRef'])) {
+            return new Reference($data['$recursiveRef'], $context['document-origin']);
         }
         $object = new \ConnectHolland\TimechimpBundle\Api\Model\Project();
-        if (property_exists($data, 'remainingBudgetHours') && $data->{'remainingBudgetHours'} !== null) {
-            $object->setRemainingBudgetHours($data->{'remainingBudgetHours'});
-        } elseif (property_exists($data, 'remainingBudgetHours') && $data->{'remainingBudgetHours'} === null) {
+        if (\array_key_exists('remainingBudgetHours', $data) && $data['remainingBudgetHours'] !== null) {
+            $object->setRemainingBudgetHours($data['remainingBudgetHours']);
+        } elseif (\array_key_exists('remainingBudgetHours', $data) && $data['remainingBudgetHours'] === null) {
             $object->setRemainingBudgetHours(null);
         }
-        if (property_exists($data, 'tagIds') && $data->{'tagIds'} !== null) {
+        if (\array_key_exists('tagIds', $data) && $data['tagIds'] !== null) {
             $values = [];
-            foreach ($data->{'tagIds'} as $value) {
+            foreach ($data['tagIds'] as $value) {
                 $values[] = $value;
             }
             $object->setTagIds($values);
-        } elseif (property_exists($data, 'tagIds') && $data->{'tagIds'} === null) {
+        } elseif (\array_key_exists('tagIds', $data) && $data['tagIds'] === null) {
             $object->setTagIds(null);
         }
-        if (property_exists($data, 'tagNames') && $data->{'tagNames'} !== null) {
+        if (\array_key_exists('tagNames', $data) && $data['tagNames'] !== null) {
             $values_1 = [];
-            foreach ($data->{'tagNames'} as $value_1) {
+            foreach ($data['tagNames'] as $value_1) {
                 $values_1[] = $value_1;
             }
             $object->setTagNames($values_1);
-        } elseif (property_exists($data, 'tagNames') && $data->{'tagNames'} === null) {
+        } elseif (\array_key_exists('tagNames', $data) && $data['tagNames'] === null) {
             $object->setTagNames(null);
         }
-        if (property_exists($data, 'unspecified') && $data->{'unspecified'} !== null) {
-            $object->setUnspecified($data->{'unspecified'});
-        } elseif (property_exists($data, 'unspecified') && $data->{'unspecified'} === null) {
+        if (\array_key_exists('unspecified', $data) && $data['unspecified'] !== null) {
+            $object->setUnspecified($data['unspecified']);
+        } elseif (\array_key_exists('unspecified', $data) && $data['unspecified'] === null) {
             $object->setUnspecified(null);
         }
-        if (property_exists($data, 'invoiceDate') && $data->{'invoiceDate'} !== null) {
-            $object->setInvoiceDate(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data->{'invoiceDate'}));
-        } elseif (property_exists($data, 'invoiceDate') && $data->{'invoiceDate'} === null) {
+        if (\array_key_exists('invoiceDate', $data) && $data['invoiceDate'] !== null) {
+            $object->setInvoiceDate(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data['invoiceDate']));
+        } elseif (\array_key_exists('invoiceDate', $data) && $data['invoiceDate'] === null) {
             $object->setInvoiceDate(null);
         }
-        if (property_exists($data, 'invoiceInInstallments') && $data->{'invoiceInInstallments'} !== null) {
-            $object->setInvoiceInInstallments($data->{'invoiceInInstallments'});
-        } elseif (property_exists($data, 'invoiceInInstallments') && $data->{'invoiceInInstallments'} === null) {
+        if (\array_key_exists('invoiceInInstallments', $data) && $data['invoiceInInstallments'] !== null) {
+            $object->setInvoiceInInstallments($data['invoiceInInstallments']);
+        } elseif (\array_key_exists('invoiceInInstallments', $data) && $data['invoiceInInstallments'] === null) {
             $object->setInvoiceInInstallments(null);
         }
-        if (property_exists($data, 'budgetNotificationPercentage') && $data->{'budgetNotificationPercentage'} !== null) {
-            $object->setBudgetNotificationPercentage($data->{'budgetNotificationPercentage'});
-        } elseif (property_exists($data, 'budgetNotificationPercentage') && $data->{'budgetNotificationPercentage'} === null) {
+        if (\array_key_exists('budgetNotificationPercentage', $data) && $data['budgetNotificationPercentage'] !== null) {
+            $object->setBudgetNotificationPercentage($data['budgetNotificationPercentage']);
+        } elseif (\array_key_exists('budgetNotificationPercentage', $data) && $data['budgetNotificationPercentage'] === null) {
             $object->setBudgetNotificationPercentage(null);
         }
-        if (property_exists($data, 'budgetNotificationHasBeenSent') && $data->{'budgetNotificationHasBeenSent'} !== null) {
-            $object->setBudgetNotificationHasBeenSent($data->{'budgetNotificationHasBeenSent'});
-        } elseif (property_exists($data, 'budgetNotificationHasBeenSent') && $data->{'budgetNotificationHasBeenSent'} === null) {
+        if (\array_key_exists('budgetNotificationHasBeenSent', $data) && $data['budgetNotificationHasBeenSent'] !== null) {
+            $object->setBudgetNotificationHasBeenSent($data['budgetNotificationHasBeenSent']);
+        } elseif (\array_key_exists('budgetNotificationHasBeenSent', $data) && $data['budgetNotificationHasBeenSent'] === null) {
             $object->setBudgetNotificationHasBeenSent(null);
         }
-        if (property_exists($data, 'clientId') && $data->{'clientId'} !== null) {
-            $object->setClientId($data->{'clientId'});
-        } elseif (property_exists($data, 'clientId') && $data->{'clientId'} === null) {
+        if (\array_key_exists('clientId', $data) && $data['clientId'] !== null) {
+            $object->setClientId($data['clientId']);
+        } elseif (\array_key_exists('clientId', $data) && $data['clientId'] === null) {
             $object->setClientId(null);
         }
-        if (property_exists($data, 'invoiceStatus') && $data->{'invoiceStatus'} !== null) {
-            $object->setInvoiceStatus($data->{'invoiceStatus'});
-        } elseif (property_exists($data, 'invoiceStatus') && $data->{'invoiceStatus'} === null) {
+        if (\array_key_exists('invoiceStatus', $data) && $data['invoiceStatus'] !== null) {
+            $object->setInvoiceStatus($data['invoiceStatus']);
+        } elseif (\array_key_exists('invoiceStatus', $data) && $data['invoiceStatus'] === null) {
             $object->setInvoiceStatus(null);
         }
-        if (property_exists($data, 'invoiceId') && $data->{'invoiceId'} !== null) {
-            $object->setInvoiceId($data->{'invoiceId'});
-        } elseif (property_exists($data, 'invoiceId') && $data->{'invoiceId'} === null) {
+        if (\array_key_exists('invoiceId', $data) && $data['invoiceId'] !== null) {
+            $object->setInvoiceId($data['invoiceId']);
+        } elseif (\array_key_exists('invoiceId', $data) && $data['invoiceId'] === null) {
             $object->setInvoiceId(null);
         }
-        if (property_exists($data, 'color') && $data->{'color'} !== null) {
-            $object->setColor($data->{'color'});
-        } elseif (property_exists($data, 'color') && $data->{'color'} === null) {
+        if (\array_key_exists('color', $data) && $data['color'] !== null) {
+            $object->setColor($data['color']);
+        } elseif (\array_key_exists('color', $data) && $data['color'] === null) {
             $object->setColor(null);
         }
-        if (property_exists($data, 'visibleOnSchedule') && $data->{'visibleOnSchedule'} !== null) {
-            $object->setVisibleOnSchedule($data->{'visibleOnSchedule'});
-        } elseif (property_exists($data, 'visibleOnSchedule') && $data->{'visibleOnSchedule'} === null) {
+        if (\array_key_exists('visibleOnSchedule', $data) && $data['visibleOnSchedule'] !== null) {
+            $object->setVisibleOnSchedule($data['visibleOnSchedule']);
+        } elseif (\array_key_exists('visibleOnSchedule', $data) && $data['visibleOnSchedule'] === null) {
             $object->setVisibleOnSchedule(null);
         }
-        if (property_exists($data, 'externalUrl') && $data->{'externalUrl'} !== null) {
-            $object->setExternalUrl($data->{'externalUrl'});
-        } elseif (property_exists($data, 'externalUrl') && $data->{'externalUrl'} === null) {
+        if (\array_key_exists('externalUrl', $data) && $data['externalUrl'] !== null) {
+            $object->setExternalUrl($data['externalUrl']);
+        } elseif (\array_key_exists('externalUrl', $data) && $data['externalUrl'] === null) {
             $object->setExternalUrl(null);
         }
-        if (property_exists($data, 'externalName') && $data->{'externalName'} !== null) {
-            $object->setExternalName($data->{'externalName'});
-        } elseif (property_exists($data, 'externalName') && $data->{'externalName'} === null) {
+        if (\array_key_exists('externalName', $data) && $data['externalName'] !== null) {
+            $object->setExternalName($data['externalName']);
+        } elseif (\array_key_exists('externalName', $data) && $data['externalName'] === null) {
             $object->setExternalName(null);
         }
-        if (property_exists($data, 'invoiceReference') && $data->{'invoiceReference'} !== null) {
-            $object->setInvoiceReference($data->{'invoiceReference'});
-        } elseif (property_exists($data, 'invoiceReference') && $data->{'invoiceReference'} === null) {
+        if (\array_key_exists('invoiceReference', $data) && $data['invoiceReference'] !== null) {
+            $object->setInvoiceReference($data['invoiceReference']);
+        } elseif (\array_key_exists('invoiceReference', $data) && $data['invoiceReference'] === null) {
             $object->setInvoiceReference(null);
         }
-        if (property_exists($data, 'projectTasks') && $data->{'projectTasks'} !== null) {
+        if (\array_key_exists('projectTasks', $data) && $data['projectTasks'] !== null) {
             $values_2 = [];
-            foreach ($data->{'projectTasks'} as $value_2) {
+            foreach ($data['projectTasks'] as $value_2) {
                 $values_2[] = $this->denormalizer->denormalize($value_2, 'ConnectHolland\\TimechimpBundle\\Api\\Model\\ProjectTask', 'json', $context);
             }
             $object->setProjectTasks($values_2);
-        } elseif (property_exists($data, 'projectTasks') && $data->{'projectTasks'} === null) {
+        } elseif (\array_key_exists('projectTasks', $data) && $data['projectTasks'] === null) {
             $object->setProjectTasks(null);
         }
-        if (property_exists($data, 'projectUsers') && $data->{'projectUsers'} !== null) {
+        if (\array_key_exists('projectUsers', $data) && $data['projectUsers'] !== null) {
             $values_3 = [];
-            foreach ($data->{'projectUsers'} as $value_3) {
+            foreach ($data['projectUsers'] as $value_3) {
                 $values_3[] = $this->denormalizer->denormalize($value_3, 'ConnectHolland\\TimechimpBundle\\Api\\Model\\ProjectUser', 'json', $context);
             }
             $object->setProjectUsers($values_3);
-        } elseif (property_exists($data, 'projectUsers') && $data->{'projectUsers'} === null) {
+        } elseif (\array_key_exists('projectUsers', $data) && $data['projectUsers'] === null) {
             $object->setProjectUsers(null);
         }
-        if (property_exists($data, 'id') && $data->{'id'} !== null) {
-            $object->setId($data->{'id'});
-        } elseif (property_exists($data, 'id') && $data->{'id'} === null) {
+        if (\array_key_exists('id', $data) && $data['id'] !== null) {
+            $object->setId($data['id']);
+        } elseif (\array_key_exists('id', $data) && $data['id'] === null) {
             $object->setId(null);
         }
-        if (property_exists($data, 'active') && $data->{'active'} !== null) {
-            $object->setActive($data->{'active'});
-        } elseif (property_exists($data, 'active') && $data->{'active'} === null) {
+        if (\array_key_exists('active', $data) && $data['active'] !== null) {
+            $object->setActive($data['active']);
+        } elseif (\array_key_exists('active', $data) && $data['active'] === null) {
             $object->setActive(null);
         }
-        if (property_exists($data, 'customerId') && $data->{'customerId'} !== null) {
-            $object->setCustomerId($data->{'customerId'});
-        } elseif (property_exists($data, 'customerId') && $data->{'customerId'} === null) {
+        if (\array_key_exists('customerId', $data) && $data['customerId'] !== null) {
+            $object->setCustomerId($data['customerId']);
+        } elseif (\array_key_exists('customerId', $data) && $data['customerId'] === null) {
             $object->setCustomerId(null);
         }
-        if (property_exists($data, 'customerName') && $data->{'customerName'} !== null) {
-            $object->setCustomerName($data->{'customerName'});
-        } elseif (property_exists($data, 'customerName') && $data->{'customerName'} === null) {
+        if (\array_key_exists('customerName', $data) && $data['customerName'] !== null) {
+            $object->setCustomerName($data['customerName']);
+        } elseif (\array_key_exists('customerName', $data) && $data['customerName'] === null) {
             $object->setCustomerName(null);
         }
-        if (property_exists($data, 'name') && $data->{'name'} !== null) {
-            $object->setName($data->{'name'});
-        } elseif (property_exists($data, 'name') && $data->{'name'} === null) {
+        if (\array_key_exists('name', $data) && $data['name'] !== null) {
+            $object->setName($data['name']);
+        } elseif (\array_key_exists('name', $data) && $data['name'] === null) {
             $object->setName(null);
         }
-        if (property_exists($data, 'code') && $data->{'code'} !== null) {
-            $object->setCode($data->{'code'});
-        } elseif (property_exists($data, 'code') && $data->{'code'} === null) {
+        if (\array_key_exists('code', $data) && $data['code'] !== null) {
+            $object->setCode($data['code']);
+        } elseif (\array_key_exists('code', $data) && $data['code'] === null) {
             $object->setCode(null);
         }
-        if (property_exists($data, 'notes') && $data->{'notes'} !== null) {
-            $object->setNotes($data->{'notes'});
-        } elseif (property_exists($data, 'notes') && $data->{'notes'} === null) {
+        if (\array_key_exists('notes', $data) && $data['notes'] !== null) {
+            $object->setNotes($data['notes']);
+        } elseif (\array_key_exists('notes', $data) && $data['notes'] === null) {
             $object->setNotes(null);
         }
-        if (property_exists($data, 'invoiceMethod') && $data->{'invoiceMethod'} !== null) {
-            $object->setInvoiceMethod($data->{'invoiceMethod'});
-        } elseif (property_exists($data, 'invoiceMethod') && $data->{'invoiceMethod'} === null) {
+        if (\array_key_exists('invoiceMethod', $data) && $data['invoiceMethod'] !== null) {
+            $object->setInvoiceMethod($data['invoiceMethod']);
+        } elseif (\array_key_exists('invoiceMethod', $data) && $data['invoiceMethod'] === null) {
             $object->setInvoiceMethod(null);
         }
-        if (property_exists($data, 'hourlyRate') && $data->{'hourlyRate'} !== null) {
-            $object->setHourlyRate($data->{'hourlyRate'});
-        } elseif (property_exists($data, 'hourlyRate') && $data->{'hourlyRate'} === null) {
+        if (\array_key_exists('hourlyRate', $data) && $data['hourlyRate'] !== null) {
+            $object->setHourlyRate($data['hourlyRate']);
+        } elseif (\array_key_exists('hourlyRate', $data) && $data['hourlyRate'] === null) {
             $object->setHourlyRate(null);
         }
-        if (property_exists($data, 'rate') && $data->{'rate'} !== null) {
-            $object->setRate($data->{'rate'});
-        } elseif (property_exists($data, 'rate') && $data->{'rate'} === null) {
+        if (\array_key_exists('rate', $data) && $data['rate'] !== null) {
+            $object->setRate($data['rate']);
+        } elseif (\array_key_exists('rate', $data) && $data['rate'] === null) {
             $object->setRate(null);
         }
-        if (property_exists($data, 'budgetMethod') && $data->{'budgetMethod'} !== null) {
-            $object->setBudgetMethod($data->{'budgetMethod'});
-        } elseif (property_exists($data, 'budgetMethod') && $data->{'budgetMethod'} === null) {
+        if (\array_key_exists('budgetMethod', $data) && $data['budgetMethod'] !== null) {
+            $object->setBudgetMethod($data['budgetMethod']);
+        } elseif (\array_key_exists('budgetMethod', $data) && $data['budgetMethod'] === null) {
             $object->setBudgetMethod(null);
         }
-        if (property_exists($data, 'budgetRate') && $data->{'budgetRate'} !== null) {
-            $object->setBudgetRate($data->{'budgetRate'});
-        } elseif (property_exists($data, 'budgetRate') && $data->{'budgetRate'} === null) {
+        if (\array_key_exists('budgetRate', $data) && $data['budgetRate'] !== null) {
+            $object->setBudgetRate($data['budgetRate']);
+        } elseif (\array_key_exists('budgetRate', $data) && $data['budgetRate'] === null) {
             $object->setBudgetRate(null);
         }
-        if (property_exists($data, 'budgetHours') && $data->{'budgetHours'} !== null) {
-            $object->setBudgetHours($data->{'budgetHours'});
-        } elseif (property_exists($data, 'budgetHours') && $data->{'budgetHours'} === null) {
+        if (\array_key_exists('budgetHours', $data) && $data['budgetHours'] !== null) {
+            $object->setBudgetHours($data['budgetHours']);
+        } elseif (\array_key_exists('budgetHours', $data) && $data['budgetHours'] === null) {
             $object->setBudgetHours(null);
         }
-        if (property_exists($data, 'startDate') && $data->{'startDate'} !== null) {
-            $object->setStartDate(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data->{'startDate'}));
-        } elseif (property_exists($data, 'startDate') && $data->{'startDate'} === null) {
+        if (\array_key_exists('startDate', $data) && $data['startDate'] !== null) {
+            $object->setStartDate(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data['startDate']));
+        } elseif (\array_key_exists('startDate', $data) && $data['startDate'] === null) {
             $object->setStartDate(null);
         }
-        if (property_exists($data, 'endDate') && $data->{'endDate'} !== null) {
-            $object->setEndDate(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data->{'endDate'}));
-        } elseif (property_exists($data, 'endDate') && $data->{'endDate'} === null) {
+        if (\array_key_exists('endDate', $data) && $data['endDate'] !== null) {
+            $object->setEndDate(\DateTime::createFromFormat('Y-m-d\\TH:i:s', $data['endDate']));
+        } elseif (\array_key_exists('endDate', $data) && $data['endDate'] === null) {
             $object->setEndDate(null);
         }
-        if (property_exists($data, 'projectSubscription') && $data->{'projectSubscription'} !== null) {
-            $object->setProjectSubscription($this->denormalizer->denormalize($data->{'projectSubscription'}, 'ConnectHolland\\TimechimpBundle\\Api\\Model\\ProjectSubscription', 'json', $context));
-        } elseif (property_exists($data, 'projectSubscription') && $data->{'projectSubscription'} === null) {
+        if (\array_key_exists('projectSubscription', $data) && $data['projectSubscription'] !== null) {
+            $object->setProjectSubscription($this->denormalizer->denormalize($data['projectSubscription'], 'ConnectHolland\\TimechimpBundle\\Api\\Model\\ProjectSubscription', 'json', $context));
+        } elseif (\array_key_exists('projectSubscription', $data) && $data['projectSubscription'] === null) {
             $object->setProjectSubscription(null);
         }
 
@@ -229,192 +235,124 @@ class ProjectNormalizer implements DenormalizerInterface, NormalizerInterface, D
 
     public function normalize($object, $format = null, array $context = [])
     {
-        $data = new \stdClass();
+        $data = [];
         if (null !== $object->getRemainingBudgetHours()) {
-            $data->{'remainingBudgetHours'} = $object->getRemainingBudgetHours();
-        } else {
-            $data->{'remainingBudgetHours'} = null;
+            $data['remainingBudgetHours'] = $object->getRemainingBudgetHours();
         }
         if (null !== $object->getTagIds()) {
             $values = [];
             foreach ($object->getTagIds() as $value) {
                 $values[] = $value;
             }
-            $data->{'tagIds'} = $values;
-        } else {
-            $data->{'tagIds'} = null;
+            $data['tagIds'] = $values;
         }
         if (null !== $object->getTagNames()) {
             $values_1 = [];
             foreach ($object->getTagNames() as $value_1) {
                 $values_1[] = $value_1;
             }
-            $data->{'tagNames'} = $values_1;
-        } else {
-            $data->{'tagNames'} = null;
+            $data['tagNames'] = $values_1;
         }
         if (null !== $object->getUnspecified()) {
-            $data->{'unspecified'} = $object->getUnspecified();
-        } else {
-            $data->{'unspecified'} = null;
+            $data['unspecified'] = $object->getUnspecified();
         }
         if (null !== $object->getInvoiceDate()) {
-            $data->{'invoiceDate'} = $object->getInvoiceDate()->format('Y-m-d\\TH:i:s');
-        } else {
-            $data->{'invoiceDate'} = null;
+            $data['invoiceDate'] = $object->getInvoiceDate()->format('Y-m-d\\TH:i:s');
         }
         if (null !== $object->getInvoiceInInstallments()) {
-            $data->{'invoiceInInstallments'} = $object->getInvoiceInInstallments();
-        } else {
-            $data->{'invoiceInInstallments'} = null;
+            $data['invoiceInInstallments'] = $object->getInvoiceInInstallments();
         }
         if (null !== $object->getBudgetNotificationPercentage()) {
-            $data->{'budgetNotificationPercentage'} = $object->getBudgetNotificationPercentage();
-        } else {
-            $data->{'budgetNotificationPercentage'} = null;
+            $data['budgetNotificationPercentage'] = $object->getBudgetNotificationPercentage();
         }
         if (null !== $object->getBudgetNotificationHasBeenSent()) {
-            $data->{'budgetNotificationHasBeenSent'} = $object->getBudgetNotificationHasBeenSent();
-        } else {
-            $data->{'budgetNotificationHasBeenSent'} = null;
+            $data['budgetNotificationHasBeenSent'] = $object->getBudgetNotificationHasBeenSent();
         }
         if (null !== $object->getClientId()) {
-            $data->{'clientId'} = $object->getClientId();
-        } else {
-            $data->{'clientId'} = null;
+            $data['clientId'] = $object->getClientId();
         }
         if (null !== $object->getInvoiceStatus()) {
-            $data->{'invoiceStatus'} = $object->getInvoiceStatus();
-        } else {
-            $data->{'invoiceStatus'} = null;
+            $data['invoiceStatus'] = $object->getInvoiceStatus();
         }
         if (null !== $object->getInvoiceId()) {
-            $data->{'invoiceId'} = $object->getInvoiceId();
-        } else {
-            $data->{'invoiceId'} = null;
+            $data['invoiceId'] = $object->getInvoiceId();
         }
         if (null !== $object->getColor()) {
-            $data->{'color'} = $object->getColor();
-        } else {
-            $data->{'color'} = null;
+            $data['color'] = $object->getColor();
         }
         if (null !== $object->getVisibleOnSchedule()) {
-            $data->{'visibleOnSchedule'} = $object->getVisibleOnSchedule();
-        } else {
-            $data->{'visibleOnSchedule'} = null;
+            $data['visibleOnSchedule'] = $object->getVisibleOnSchedule();
         }
         if (null !== $object->getExternalUrl()) {
-            $data->{'externalUrl'} = $object->getExternalUrl();
-        } else {
-            $data->{'externalUrl'} = null;
+            $data['externalUrl'] = $object->getExternalUrl();
         }
         if (null !== $object->getExternalName()) {
-            $data->{'externalName'} = $object->getExternalName();
-        } else {
-            $data->{'externalName'} = null;
+            $data['externalName'] = $object->getExternalName();
         }
         if (null !== $object->getInvoiceReference()) {
-            $data->{'invoiceReference'} = $object->getInvoiceReference();
-        } else {
-            $data->{'invoiceReference'} = null;
+            $data['invoiceReference'] = $object->getInvoiceReference();
         }
         if (null !== $object->getProjectTasks()) {
             $values_2 = [];
             foreach ($object->getProjectTasks() as $value_2) {
                 $values_2[] = $this->normalizer->normalize($value_2, 'json', $context);
             }
-            $data->{'projectTasks'} = $values_2;
-        } else {
-            $data->{'projectTasks'} = null;
+            $data['projectTasks'] = $values_2;
         }
         if (null !== $object->getProjectUsers()) {
             $values_3 = [];
             foreach ($object->getProjectUsers() as $value_3) {
                 $values_3[] = $this->normalizer->normalize($value_3, 'json', $context);
             }
-            $data->{'projectUsers'} = $values_3;
-        } else {
-            $data->{'projectUsers'} = null;
+            $data['projectUsers'] = $values_3;
         }
         if (null !== $object->getId()) {
-            $data->{'id'} = $object->getId();
-        } else {
-            $data->{'id'} = null;
+            $data['id'] = $object->getId();
         }
         if (null !== $object->getActive()) {
-            $data->{'active'} = $object->getActive();
-        } else {
-            $data->{'active'} = null;
+            $data['active'] = $object->getActive();
         }
         if (null !== $object->getCustomerId()) {
-            $data->{'customerId'} = $object->getCustomerId();
-        } else {
-            $data->{'customerId'} = null;
+            $data['customerId'] = $object->getCustomerId();
         }
         if (null !== $object->getCustomerName()) {
-            $data->{'customerName'} = $object->getCustomerName();
-        } else {
-            $data->{'customerName'} = null;
+            $data['customerName'] = $object->getCustomerName();
         }
         if (null !== $object->getName()) {
-            $data->{'name'} = $object->getName();
-        } else {
-            $data->{'name'} = null;
+            $data['name'] = $object->getName();
         }
         if (null !== $object->getCode()) {
-            $data->{'code'} = $object->getCode();
-        } else {
-            $data->{'code'} = null;
+            $data['code'] = $object->getCode();
         }
         if (null !== $object->getNotes()) {
-            $data->{'notes'} = $object->getNotes();
-        } else {
-            $data->{'notes'} = null;
+            $data['notes'] = $object->getNotes();
         }
         if (null !== $object->getInvoiceMethod()) {
-            $data->{'invoiceMethod'} = $object->getInvoiceMethod();
-        } else {
-            $data->{'invoiceMethod'} = null;
+            $data['invoiceMethod'] = $object->getInvoiceMethod();
         }
         if (null !== $object->getHourlyRate()) {
-            $data->{'hourlyRate'} = $object->getHourlyRate();
-        } else {
-            $data->{'hourlyRate'} = null;
+            $data['hourlyRate'] = $object->getHourlyRate();
         }
         if (null !== $object->getRate()) {
-            $data->{'rate'} = $object->getRate();
-        } else {
-            $data->{'rate'} = null;
+            $data['rate'] = $object->getRate();
         }
         if (null !== $object->getBudgetMethod()) {
-            $data->{'budgetMethod'} = $object->getBudgetMethod();
-        } else {
-            $data->{'budgetMethod'} = null;
+            $data['budgetMethod'] = $object->getBudgetMethod();
         }
         if (null !== $object->getBudgetRate()) {
-            $data->{'budgetRate'} = $object->getBudgetRate();
-        } else {
-            $data->{'budgetRate'} = null;
+            $data['budgetRate'] = $object->getBudgetRate();
         }
         if (null !== $object->getBudgetHours()) {
-            $data->{'budgetHours'} = $object->getBudgetHours();
-        } else {
-            $data->{'budgetHours'} = null;
+            $data['budgetHours'] = $object->getBudgetHours();
         }
         if (null !== $object->getStartDate()) {
-            $data->{'startDate'} = $object->getStartDate()->format('Y-m-d\\TH:i:s');
-        } else {
-            $data->{'startDate'} = null;
+            $data['startDate'] = $object->getStartDate()->format('Y-m-d\\TH:i:s');
         }
         if (null !== $object->getEndDate()) {
-            $data->{'endDate'} = $object->getEndDate()->format('Y-m-d\\TH:i:s');
-        } else {
-            $data->{'endDate'} = null;
+            $data['endDate'] = $object->getEndDate()->format('Y-m-d\\TH:i:s');
         }
         if (null !== $object->getProjectSubscription()) {
-            $data->{'projectSubscription'} = $this->normalizer->normalize($object->getProjectSubscription(), 'json', $context);
-        } else {
-            $data->{'projectSubscription'} = null;
+            $data['projectSubscription'] = $this->normalizer->normalize($object->getProjectSubscription(), 'json', $context);
         }
 
         return $data;

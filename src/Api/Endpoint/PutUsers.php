@@ -44,4 +44,9 @@ class PutUsers extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane
             return $serializer->deserialize($body, 'ConnectHolland\\TimechimpBundle\\Api\\Model\\User[]', 'json');
         }
     }
+
+    public function getAuthenticationScopes(): array
+    {
+        return [];
+    }
 }

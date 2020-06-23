@@ -44,4 +44,9 @@ class Me extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenA
             return $serializer->deserialize($body, 'ConnectHolland\\TimechimpBundle\\Api\\Model\\User', 'json');
         }
     }
+
+    public function getAuthenticationScopes(): array
+    {
+        return [];
+    }
 }

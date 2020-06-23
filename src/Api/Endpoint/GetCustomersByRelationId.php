@@ -51,4 +51,9 @@ class GetCustomersByRelationId extends \Jane\OpenApiRuntime\Client\BaseEndpoint 
             return $serializer->deserialize($body, 'ConnectHolland\\TimechimpBundle\\Api\\Model\\Customer[]', 'json');
         }
     }
+
+    public function getAuthenticationScopes(): array
+    {
+        return [];
+    }
 }

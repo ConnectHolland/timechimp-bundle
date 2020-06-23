@@ -66,4 +66,9 @@ class DeleteProjectNote extends \Jane\OpenApiRuntime\Client\BaseEndpoint impleme
             return null;
         }
     }
+
+    public function getAuthenticationScopes(): array
+    {
+        return [];
+    }
 }
