@@ -1,4 +1,5 @@
 parameters:
+    timechimp.access_token: '%env(string:TIMECHIMP_ACCESS_TOKEN)%'
 
 services:
     _defaults:
@@ -8,7 +9,7 @@ services:
 
     ConnectHolland\TimechimpBundle\Api\Authentication\AccessTokenAuthentication:
         arguments:
-            $apiKey: 'Bearer %env(TIMECHIMP_ACCESS_TOKEN)%'
+            $apiKey: 'Bearer %timechimp.access_token%'
 
     ConnectHolland\TimechimpBundle\Api\Client:
         public: true
