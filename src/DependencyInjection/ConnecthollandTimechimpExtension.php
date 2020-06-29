@@ -23,6 +23,8 @@ class ConnecthollandTimechimpExtension extends Extension implements ExtensionInt
 
         $config = $this->processConfiguration($configuration, $configs);
 
+        $container->setParameter('timechimp.access_token', $config['api_key']);
+
         $loader = new YamlFileLoader(
             $container,
             new FileLocator(__DIR__.'/../Resources/config')

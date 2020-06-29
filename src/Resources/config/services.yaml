@@ -1,5 +1,4 @@
 parameters:
-    timechimp.access_token: '%env(string:TIMECHIMP_ACCESS_TOKEN)%'
 
 services:
     _defaults:
