@@ -9,7 +9,7 @@ services:
 
     ConnectHolland\TimechimpBundle\Api\Authentication\AccessTokenAuthentication:
         arguments:
-            $apiKey: 'Bearer %timechimp.access_token%'
+            - 'Bearer %timechimp.access_token%'
 
     ConnectHolland\TimechimpBundle\Api\Client:
         public: true
@@ -17,4 +17,4 @@ services:
         factory: [ConnectHolland\TimechimpBundle\Api\Client, create]
         arguments:
             $httpClient: ~
-            $authentication: '@ConnectHolland\TimechimpBundle\Api\Authentication\AccessTokenAuthentication'
+            $additionalPlugins: ['@ConnectHolland\TimechimpBundle\Api\Authentication\AccessTokenAuthentication']
