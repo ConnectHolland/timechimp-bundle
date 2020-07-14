@@ -52,6 +52,6 @@ class UpdateMileage extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements 
 
     public function getAuthenticationScopes(): array
     {
-        return [];
+        return ['Access token'];
     }
 }

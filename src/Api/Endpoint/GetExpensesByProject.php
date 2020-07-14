@@ -57,6 +57,6 @@ class GetExpensesByProject extends \Jane\OpenApiRuntime\Client\BaseEndpoint impl
 
     public function getAuthenticationScopes(): array
     {
-        return [];
+        return ['Access token'];
     }
 }

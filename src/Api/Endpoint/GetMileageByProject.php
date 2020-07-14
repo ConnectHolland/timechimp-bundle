@@ -57,6 +57,6 @@ class GetMileageByProject extends \Jane\OpenApiRuntime\Client\BaseEndpoint imple
 
     public function getAuthenticationScopes(): array
     {
-        return [];
+        return ['Access token'];
     }
 }

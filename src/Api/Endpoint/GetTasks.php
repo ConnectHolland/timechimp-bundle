@@ -47,6 +47,6 @@ class GetTasks extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane
 
     public function getAuthenticationScopes(): array
     {
-        return [];
+        return ['Access token'];
     }
 }

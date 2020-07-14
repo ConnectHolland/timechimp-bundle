@@ -60,6 +60,6 @@ class GetMileageByDateRange extends \Jane\OpenApiRuntime\Client\BaseEndpoint imp
 
     public function getAuthenticationScopes(): array
     {
-        return [];
+        return ['Access token'];
     }
 }

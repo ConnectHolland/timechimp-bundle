@@ -47,6 +47,6 @@ class GetInvoices extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \J
 
     public function getAuthenticationScopes(): array
     {
-        return [];
+        return ['Access token'];
     }
 }

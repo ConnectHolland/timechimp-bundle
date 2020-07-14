@@ -60,6 +60,6 @@ class GetExpensesByDateRange extends \Jane\OpenApiRuntime\Client\BaseEndpoint im
 
     public function getAuthenticationScopes(): array
     {
-        return [];
+        return ['Access token'];
     }
 }

@@ -57,6 +57,6 @@ class GetTimeByProject extends \Jane\OpenApiRuntime\Client\BaseEndpoint implemen
 
     public function getAuthenticationScopes(): array
     {
-        return [];
+        return ['Access token'];
     }
 }
