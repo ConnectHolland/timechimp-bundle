@@ -54,6 +54,6 @@ class GetCustomerByName extends \Jane\OpenApiRuntime\Client\BaseEndpoint impleme
 
     public function getAuthenticationScopes(): array
     {
-        return [];
+        return ['Access token'];
     }
 }

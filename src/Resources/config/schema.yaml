@@ -6,6 +6,8 @@ info:
 host: api.timechimp.com
 schemes:
   - https
+security:
+    - Access token: []
 paths:
   /v1/customers:
     get:

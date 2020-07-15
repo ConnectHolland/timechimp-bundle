@@ -54,6 +54,6 @@ class GetTag extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\O
 
     public function getAuthenticationScopes(): array
     {
-        return [];
+        return ['Access token'];
     }
 }

@@ -54,6 +54,6 @@ class GetProject extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Ja
 
     public function getAuthenticationScopes(): array
     {
-        return [];
+        return ['Access token'];
     }
 }

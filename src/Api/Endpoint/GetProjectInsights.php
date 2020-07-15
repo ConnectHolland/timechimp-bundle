@@ -54,6 +54,6 @@ class GetProjectInsights extends \Jane\OpenApiRuntime\Client\BaseEndpoint implem
 
     public function getAuthenticationScopes(): array
     {
-        return [];
+        return ['Access token'];
     }
 }

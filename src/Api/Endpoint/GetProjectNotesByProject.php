@@ -57,6 +57,6 @@ class GetProjectNotesByProject extends \Jane\OpenApiRuntime\Client\BaseEndpoint 
 
     public function getAuthenticationScopes(): array
     {
-        return [];
+        return ['Access token'];
     }
 }

@@ -47,6 +47,6 @@ class Me extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenA
 
     public function getAuthenticationScopes(): array
     {
-        return [];
+        return ['Access token'];
     }
 }

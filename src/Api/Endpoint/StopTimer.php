@@ -54,6 +54,6 @@ class StopTimer extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jan
 
     public function getAuthenticationScopes(): array
     {
-        return [];
+        return ['Access token'];
     }
 }

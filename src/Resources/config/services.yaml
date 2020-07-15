@@ -6,6 +6,12 @@ services:
         autoconfigure: false
         public: false
 
+    timechimp.authentication_registry:
+        class: 'Jane\OpenApiRuntime\Client\Plugin\AuthenticationRegistry'
+        arguments:
+            $authenticationPlugins:
+                - '@ConnectHolland\TimechimpBundle\Api\Authentication\AccessTokenAuthentication'
+
     ConnectHolland\TimechimpBundle\Api\Authentication\AccessTokenAuthentication:
         arguments:
             - 'Bearer %timechimp.access_token%'
@@ -16,4 +22,4 @@ services:
         factory: [ConnectHolland\TimechimpBundle\Api\Client, create]
         arguments:
             $httpClient: ~
-            $additionalPlugins: ['@ConnectHolland\TimechimpBundle\Api\Authentication\AccessTokenAuthentication']
+            $additionalPlugins: ['@timechimp.authentication_registry']
