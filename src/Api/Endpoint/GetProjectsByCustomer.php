@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace ConnectHolland\TimechimpBundle\Api\Endpoint;
 
-class GetProjectsByCustomer extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
+class GetProjectsByCustomer extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Endpoint
 {
     protected $customerId;
 
@@ -21,7 +21,7 @@ class GetProjectsByCustomer extends \Jane\OpenApiRuntime\Client\BaseEndpoint imp
         $this->customerId = $customerId;
     }
 
-    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
+    use \Jane\OpenApiRuntime\Client\EndpointTrait;
 
     public function getMethod(): string
     {

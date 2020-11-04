@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace ConnectHolland\TimechimpBundle\Api\Endpoint;
 
-class StopTimer extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
+class StopTimer extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Endpoint
 {
     protected $id;
 
@@ -18,7 +18,7 @@ class StopTimer extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jan
         $this->id = $id;
     }
 
-    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
+    use \Jane\OpenApiRuntime\Client\EndpointTrait;
 
     public function getMethod(): string
     {

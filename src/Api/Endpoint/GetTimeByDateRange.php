@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace ConnectHolland\TimechimpBundle\Api\Endpoint;
 
-class GetTimeByDateRange extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
+class GetTimeByDateRange extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Endpoint
 {
     protected $startDate;
     protected $endDate;
@@ -24,7 +24,7 @@ class GetTimeByDateRange extends \Jane\OpenApiRuntime\Client\BaseEndpoint implem
         $this->endDate   = $endDate;
     }
 
-    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
+    use \Jane\OpenApiRuntime\Client\EndpointTrait;
 
     public function getMethod(): string
     {

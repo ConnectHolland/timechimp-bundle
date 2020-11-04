@@ -9,14 +9,14 @@ declare(strict_types=1);
 
 namespace ConnectHolland\TimechimpBundle\Api\Endpoint;
 
-class UpdateCustomer extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Psr7Endpoint
+class UpdateCustomer extends \Jane\OpenApiRuntime\Client\BaseEndpoint implements \Jane\OpenApiRuntime\Client\Endpoint
 {
     public function __construct(\ConnectHolland\TimechimpBundle\Api\Model\Customer $customer)
     {
         $this->body = $customer;
     }
 
-    use \Jane\OpenApiRuntime\Client\Psr7EndpointTrait;
+    use \Jane\OpenApiRuntime\Client\EndpointTrait;
 
     public function getMethod(): string
     {
