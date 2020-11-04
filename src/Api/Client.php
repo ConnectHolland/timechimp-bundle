@@ -9,7 +9,7 @@ declare(strict_types=1);
 
 namespace ConnectHolland\TimechimpBundle\Api;
 
-class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
+class Client extends \Jane\OpenApiRuntime\Client\Client
 {
     /**
      * @param string $fetch Fetch mode to use (can be OBJECT or RESPONSE)
@@ -18,7 +18,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function getCustomers(string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetCustomers(), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetCustomers(), $fetch);
     }
 
     /**
@@ -28,7 +28,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function createCustomer(\ConnectHolland\TimechimpBundle\Api\Model\Customer $customer, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\CreateCustomer($customer), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\CreateCustomer($customer), $fetch);
     }
 
     /**
@@ -38,7 +38,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function updateCustomer(\ConnectHolland\TimechimpBundle\Api\Model\Customer $customer, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\UpdateCustomer($customer), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\UpdateCustomer($customer), $fetch);
     }
 
     /**
@@ -48,7 +48,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function getCustomersByRelationId(string $relationId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetCustomersByRelationId($relationId), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetCustomersByRelationId($relationId), $fetch);
     }
 
     /**
@@ -58,7 +58,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function getCustomerByName(string $name, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetCustomerByName($name), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetCustomerByName($name), $fetch);
     }
 
     /**
@@ -68,7 +68,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function deleteCustomer(int $id, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\DeleteCustomer($id), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\DeleteCustomer($id), $fetch);
     }
 
     /**
@@ -78,7 +78,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function getCustomer(int $id, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetCustomer($id), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetCustomer($id), $fetch);
     }
 
     /**
@@ -90,7 +90,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function getExpensesByDateRange(string $startDate, string $endDate, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetExpensesByDateRange($startDate, $endDate), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetExpensesByDateRange($startDate, $endDate), $fetch);
     }
 
     /**
@@ -101,7 +101,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function getExpensesByProject(int $projectId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetExpensesByProject($projectId), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetExpensesByProject($projectId), $fetch);
     }
 
     /**
@@ -111,7 +111,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function getExpense(int $id, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetExpense($id), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetExpense($id), $fetch);
     }
 
     /**
@@ -126,7 +126,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function deleteExpense(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\DeleteExpense($queryParameters), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\DeleteExpense($queryParameters), $fetch);
     }
 
     /**
@@ -136,7 +136,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function getExpenses(string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetExpenses(), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetExpenses(), $fetch);
     }
 
     /**
@@ -146,7 +146,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function createExpense(\ConnectHolland\TimechimpBundle\Api\Model\Expense $expense, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\CreateExpense($expense), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\CreateExpense($expense), $fetch);
     }
 
     /**
@@ -156,7 +156,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function updateExpense(\ConnectHolland\TimechimpBundle\Api\Model\Expense $expense, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\UpdateExpense($expense), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\UpdateExpense($expense), $fetch);
     }
 
     /**
@@ -166,7 +166,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function getInvoices(string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetInvoices(), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetInvoices(), $fetch);
     }
 
     /**
@@ -178,7 +178,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function getMileageByDateRange(string $startDate, string $endDate, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetMileageByDateRange($startDate, $endDate), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetMileageByDateRange($startDate, $endDate), $fetch);
     }
 
     /**
@@ -189,7 +189,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function getMileageByProject(int $projectId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetMileageByProject($projectId), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetMileageByProject($projectId), $fetch);
     }
 
     /**
@@ -199,7 +199,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function getMileage(int $id, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetMileage($id), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetMileage($id), $fetch);
     }
 
     /**
@@ -214,7 +214,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function deleteMileage(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\DeleteMileage($queryParameters), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\DeleteMileage($queryParameters), $fetch);
     }
 
     /**
@@ -224,7 +224,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function getMileages(string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetMileages(), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetMileages(), $fetch);
     }
 
     /**
@@ -234,7 +234,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function createMileage(\ConnectHolland\TimechimpBundle\Api\Model\Mileage $mileage, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\CreateMileage($mileage), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\CreateMileage($mileage), $fetch);
     }
 
     /**
@@ -244,7 +244,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function updateMileage(\ConnectHolland\TimechimpBundle\Api\Model\Mileage $mileage, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\UpdateMileage($mileage), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\UpdateMileage($mileage), $fetch);
     }
 
     /**
@@ -259,7 +259,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function deleteProjectNote(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\DeleteProjectNote($queryParameters), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\DeleteProjectNote($queryParameters), $fetch);
     }
 
     /**
@@ -269,7 +269,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function getProjectNotes(string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetProjectNotes(), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetProjectNotes(), $fetch);
     }
 
     /**
@@ -279,7 +279,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function createProjectNote(\ConnectHolland\TimechimpBundle\Api\Model\ProjectNote $projectNote, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\CreateProjectNote($projectNote), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\CreateProjectNote($projectNote), $fetch);
     }
 
     /**
@@ -289,7 +289,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function updateProjectNote(\ConnectHolland\TimechimpBundle\Api\Model\ProjectNote $projectNote, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\UpdateProjectNote($projectNote), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\UpdateProjectNote($projectNote), $fetch);
     }
 
     /**
@@ -299,7 +299,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function getProjectNote(int $id, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetProjectNote($id), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetProjectNote($id), $fetch);
     }
 
     /**
@@ -310,7 +310,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function getProjectNotesByProject(int $projectId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetProjectNotesByProject($projectId), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetProjectNotesByProject($projectId), $fetch);
     }
 
     /**
@@ -325,7 +325,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function deleteProject(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\DeleteProject($queryParameters), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\DeleteProject($queryParameters), $fetch);
     }
 
     /**
@@ -335,7 +335,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function getProjects(string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetProjects(), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetProjects(), $fetch);
     }
 
     /**
@@ -345,7 +345,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function createProject(\ConnectHolland\TimechimpBundle\Api\Model\Project $project, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\CreateProject($project), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\CreateProject($project), $fetch);
     }
 
     /**
@@ -355,7 +355,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function updateProject(\ConnectHolland\TimechimpBundle\Api\Model\Project $project, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\UpdateProject($project), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\UpdateProject($project), $fetch);
     }
 
     /**
@@ -365,7 +365,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function getProject(int $id, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetProject($id), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetProject($id), $fetch);
     }
 
     /**
@@ -376,7 +376,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function getProjectsByCustomer(int $customerId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetProjectsByCustomer($customerId), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetProjectsByCustomer($customerId), $fetch);
     }
 
     /**
@@ -386,7 +386,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function getProjectInsights(int $id, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetProjectInsights($id), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetProjectInsights($id), $fetch);
     }
 
     /**
@@ -401,7 +401,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function deleteTag(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\DeleteTag($queryParameters), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\DeleteTag($queryParameters), $fetch);
     }
 
     /**
@@ -411,7 +411,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function getTags(string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetTags(), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetTags(), $fetch);
     }
 
     /**
@@ -421,7 +421,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function createTag(\ConnectHolland\TimechimpBundle\Api\Model\Tag $tag, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\CreateTag($tag), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\CreateTag($tag), $fetch);
     }
 
     /**
@@ -431,7 +431,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function updateTag(\ConnectHolland\TimechimpBundle\Api\Model\Tag $tag, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\UpdateTag($tag), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\UpdateTag($tag), $fetch);
     }
 
     /**
@@ -441,7 +441,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function getTag(int $id, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetTag($id), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetTag($id), $fetch);
     }
 
     /**
@@ -456,7 +456,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function deleteTask(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\DeleteTask($queryParameters), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\DeleteTask($queryParameters), $fetch);
     }
 
     /**
@@ -466,7 +466,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function getTasks(string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetTasks(), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetTasks(), $fetch);
     }
 
     /**
@@ -476,7 +476,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function createTask(\ConnectHolland\TimechimpBundle\Api\Model\Task $task, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\CreateTask($task), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\CreateTask($task), $fetch);
     }
 
     /**
@@ -486,7 +486,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function updateTask(\ConnectHolland\TimechimpBundle\Api\Model\Task $task, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\UpdateTask($task), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\UpdateTask($task), $fetch);
     }
 
     /**
@@ -496,7 +496,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function getTask(int $id, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetTask($id), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetTask($id), $fetch);
     }
 
     /**
@@ -508,7 +508,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function getTimeByDateRange(string $startDate, string $endDate, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetTimeByDateRange($startDate, $endDate), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetTimeByDateRange($startDate, $endDate), $fetch);
     }
 
     /**
@@ -519,7 +519,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function getTimeByProject(int $projectId, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetTimeByProject($projectId), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetTimeByProject($projectId), $fetch);
     }
 
     /**
@@ -529,7 +529,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function getTime(int $id, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetTime($id), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetTime($id), $fetch);
     }
 
     /**
@@ -544,7 +544,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function deleteTime(array $queryParameters = [], string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\DeleteTime($queryParameters), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\DeleteTime($queryParameters), $fetch);
     }
 
     /**
@@ -554,7 +554,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function getTimes(string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetTimes(), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetTimes(), $fetch);
     }
 
     /**
@@ -564,7 +564,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function createTime(\ConnectHolland\TimechimpBundle\Api\Model\Time $time, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\CreateTime($time), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\CreateTime($time), $fetch);
     }
 
     /**
@@ -574,7 +574,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function updateTime(\ConnectHolland\TimechimpBundle\Api\Model\Time $time, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\UpdateTime($time), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\UpdateTime($time), $fetch);
     }
 
     /**
@@ -584,7 +584,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function startTimer(int $id, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\StartTimer($id), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\StartTimer($id), $fetch);
     }
 
     /**
@@ -594,7 +594,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function stopTimer(int $id, string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\StopTimer($id), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\StopTimer($id), $fetch);
     }
 
     /**
@@ -604,7 +604,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function getUsers(string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetUsers(), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\GetUsers(), $fetch);
     }
 
     /**
@@ -614,7 +614,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function putUsers(string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\PutUsers(), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\PutUsers(), $fetch);
     }
 
     /**
@@ -624,7 +624,7 @@ class Client extends \Jane\OpenApiRuntime\Client\Psr18Client
      */
     public function me(string $fetch = self::FETCH_OBJECT)
     {
-        return $this->executePsr7Endpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\Me(), $fetch);
+        return $this->executeEndpoint(new \ConnectHolland\TimechimpBundle\Api\Endpoint\Me(), $fetch);
     }
 
     public static function create($httpClient = null, array $additionalPlugins = [])
